@@ -1,0 +1,117 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <template id="document_custom_layout" name="Documents Custom layout">
+        <t t-call="web.layout">
+            <t t-set="head_website">
+                <script type="text/javascript">
+                    odoo.session_info = {
+                        is_admin: <t t-esc="json.dumps(request.env.user._is_admin())"/>,
+                        is_system: <t t-esc="json.dumps(request.env.user._is_system())"/>,
+                        user_id: <t t-esc="json.dumps(request.env.user.id)"/>,
+                    };
+                </script>
+
+                <t t-call-assets="web.assets_common" t-css="false"/>
+                <t t-call-assets="web.assets_common" t-js="false"/>
+                <t t-call-assets="web.assets_backend" t-js="false"/>
+
+                <style>
+                    html, body {
+                        overflow: auto;
+                    }
+                </style>
+            </t>
+
+            <t t-set="head" t-value="head_website + (head or '')"/>
+            <t t-set="body_classname" t-value="'sd_document_body'"/>
+            <div id="wrap" class="h-100 flex-column flex-nowrap d-flex">
+                <header>
+                    <div class="d-flex">
+                        <div class="o_company_logo pull-left" t-field="res_company.logo" t-options="{'widget': 'image'}" t-att-alt="'Logo of %s' % res_company.name" t-att-title="res_company.name"/>
+                        <ul class="nav navbar-nav ml-auto text-right" id="top_menu">
+                            <li class="nav-item divider" t-ignore="true" t-if="not user_id._is_public()"/>
+                            <li class="nav-item dropdown" t-ignore="true" t-if="not user_id._is_public()">
+                                <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown">
+                                    <b><span t-esc="user_id.name[:23] + '...' if user_id.name and len(user_id.name) &gt; 25 else user_id.name"/></b>
+                                </a>
+                                <div class="dropdown-menu js_usermenu" role="menu">
+                                    <a id="o_logout" class="dropdown-item" t-attf-href="/web/session/logout?redirect=/" role="menuitem">Logout</a>
+                                </div>
+                            </li>
+                        </ul>
+                    </div>
+                </header>
+                <main class="d-flex flex-column flex-nowrap">
+                    <t t-raw="0"/>
+                </main>
+            </div>
+        </t>
+    </template>
+
+    <template id="document">
+        <t t-call="sync_documents.document_custom_layout">
+            <div class="container">
+                <div class="col-6 mt16">
+                    <span class="h2" t-esc="len(attachments)"/> <spna class="h6">Documents shared by</spna> <span class="h2" t-esc="share.user_id.name"/>
+                </div>
+                <div class="row mt32">
+                    <div class="d-flex flex-wrap kanbaan_flex_box">
+                        <div class="oe_shared_attachment" t-foreach="attachments" t-as="attachment">
+                            <div class="o_card d-flex mb16">
+                                <div class="sd_kanban_image">
+                                    <div t-if="attachment.type == 'url'" class="o_url_image fa fa-link fa-3x text-muted"/>
+                                    <img t-elif="attachment.type != 'url'" class="m-auto" t-att-src="'data:image/png;base64,%s' % to_text(attachment.thumbnail)"/>
+                                </div>
+                                <div class="sd_kanban_body">
+                                    <t t-esc="attachment.name"/>
+                                    <div t-field="attachment.write_date" t-options="{'format':'MMM d, yyyy'}"/>
+                                </div>
+                                <div class="sd_right_block">
+                                    <a t-if="attachment.type != 'url'" class="ml-3" t-att-href="'/attachment/download/' + str(share.id) + '/' + token + '/' + str(attachment.id)" target="new" t-att-title="'Download ' + attachment.name">
+                                        <i class="fa fa-download"/>
+                                    </a>
+                                    <a t-elif="attachment.type == 'url'" class="ml-3" t-att-href="attachment.url" target="new" t-att-title="'Download ' + attachment.name">
+                                        <i class="fa fa-link"/>
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="oe_shared_attachment_ghost"/>
+                        <div class="oe_shared_attachment_ghost"/>
+                        <div class="oe_shared_attachment_ghost"/>
+                        <div class="oe_shared_attachment_ghost"/>
+                        <div class="oe_shared_attachment_ghost"/>
+                    </div>
+                </div>
+                <div class="row mt32">
+                    <div class="col-sm-12 text-center" t-if="attachments">
+                        <div class="row justify-content-center">
+                            <div class="mr-3" t-if="share.type == 'downloadandupload'">
+                                <form class="o_docs_upload_form position-relative d-inline-block" enctype="multipart/form-data" t-attf-action="/attachment/upload/#{share.id}/#{token}" method="POST">
+                                    <label for="files" string="Upload" class="btn btn-primary">
+                                        <i class="fa fa-upload"/> Upload </label>
+                                    <input id="files" name="files" multiple="multiple" type="file" class="d-none" onchange="form.submit()"/>
+                                </form>
+                            </div>
+                            <div class="mr-3">
+                                <a t-att-href="'/all_attachment/download/' + str(share.id)" title="Downlaod all files" class="btn btn-primary">
+                                    <i class="fa fa-download fa-fw"/> Download All
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </t>
+    </template>
+
+    <template id="link_expire">
+        <t t-call="sync_documents.document_custom_layout">
+            <div class="m-auto h2 mt64 alert alert-danger" role="alert">
+                Oops! This link has been expired.
+            </div>
+        </t>
+    </template>
+
+</odoo>

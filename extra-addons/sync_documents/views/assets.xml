@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <template id="assets_backend" name="dashboard assets backend" inherit_id="web.assets_backend">
+        <xpath expr="." position="inside">
+            <link rel="stylesheet" type="text/scss" href="/sync_documents/static/src/scss/variables.scss"/>
+            <link rel="stylesheet" type="text/scss" href="/sync_documents/static/src/scss/dashboard_view.scss"/>
+            <!-- Widget/Mixin -->
+            <script type="text/javascript" src="/sync_documents/static/src/js/dashboard_manager.js"/>
+            <script type="text/javascript" src="/sync_documents/static/src/js/documents_drag_events_mixin.js"/>
+            <script type="text/javascript" src="/sync_documents/static/src/js/dashboard_search_panel.js"/>
+            <!-- Dashboard Common -->
+            <script type="text/javascript" src="/sync_documents/static/src/js/dashboard_common_controller.js"/>
+            <!-- Dashboard kanban -->
+            <script type="text/javascript" src="/sync_documents/static/src/js/dashboard_kanban_model.js"/>
+            <script type="text/javascript" src="/sync_documents/static/src/js/dashboard_kanban_controller.js"/>
+            <script type="text/javascript" src="/sync_documents/static/src/js/dashboard_record.js"/>
+            <script type="text/javascript" src="/sync_documents/static/src/js/dashboard_kanban_renderer.js"/>
+            <!-- Dashboard List -->
+            <script type="text/javascript" src="/sync_documents/static/src/js/dashboard_list_controller.js"/>
+            <script type="text/javascript" src="/sync_documents/static/src/js/dashboard_list_renderer.js"/>
+            <!-- Dashboard View -->
+            <script type="text/javascript" src="/sync_documents/static/src/js/dashboard_view.js"/>
+        </xpath>
+    </template>
+</odoo>

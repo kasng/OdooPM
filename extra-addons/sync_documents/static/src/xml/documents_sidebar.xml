@@ -1,0 +1,128 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<templates>
+
+    <t t-name="DocumentsUpload">
+        <div class="sd_upload_overlay text-center text-white">
+            <i class="d-block fa fa-upload fa-9x mb-4"/>
+            <span>Drop files here to upload</span>
+        </div>
+    </t>
+
+    <t t-name="sync_documents.Chatter">
+        <button class="btn sd_btn_chatter fa fa-comments" title="Comments"/>
+        <button class="btn sd_btn_chatter_close fa fa-times" title="Chatter Close"/>
+    </t>
+
+    <t t-name="DashboardManager">
+        <div class="sd_documents_manager order-1">
+            <t t-set="isRecords" t-value="widget.records.length"/>
+            <div class="sd_documents_manager_header">
+                <t t-if="isRecords != 0">
+                    <div class="mb-0">
+                        <div class="sd-btn-group p-2">
+                            <button t-if="!widget.isArchived" class="btn fa fa-download sd_btn_download" title="Download"/>
+                            <button t-if="!widget.isArchived &amp;&amp; isRecords === 1" class="btn fa fa-pencil sd_btn_edit" title="Edit"/>
+                            <div class="d-inline">
+                                <div t-if="!widget.isArchived" class="d-inline sd_btn_folder">
+                                    <button class="btn dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" title="Folders">
+                                        <i class="fa fa-folder"/>
+                                    </button>
+                                    <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                                        <t t-foreach="widget.folders" t-as="folder">
+                                            <a t-attf-class="dropdown-item #{widget.selectedFolderID == folder.id ? 'active' : ''}" href="#" t-att-data-id="folder.id">
+                                                <t t-esc="folder.display_name"/>
+                                            </a>
+                                        </t>
+                                    </div>
+                                </div>
+                                <div t-if="!widget.isArchived &amp;&amp; (!_.isEmpty(widget.tags) || !_.isEmpty(widget.removeTags))" class="d-inline sd_btn_tags">
+                                    <button class="btn dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" title="Tags">
+                                        <i class="fa fa-tag"/>
+                                    </button>
+                                    <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                                        <li t-foreach="widget.tags" t-as="tag" class="add-tag">
+                                            <a class="dropdown-item" href="#" t-att-data-id="tag.id">
+                                                <t t-esc="tag.group_name"/> <i class="fa fa-angle-right"/> <t t-esc="tag.name"/>
+                                            </a>
+                                        </li>
+                                        <li class="dropdown-divider" t-if="widget.removeTags.length !== 0"/>
+                                        <li class="dropdown-submenu dropdown-item" t-if="widget.removeTags.length !== 0">
+                                            <a class="dropdown-toggle" id="navbarDropdown" style="cursor: default;">Remove Tags</a>
+                                            <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+                                                <li t-foreach="widget.removeTags" t-as="tag">
+                                                    <a class="dropdown-item" href="#" t-att-data-id="tag.id">
+                                                        <t t-esc="tag.group_name"/> <i class="fa fa-angle-right"/> <t t-esc="tag.name"/>
+                                                    </a>
+                                                </li>
+                                            </ul>
+                                        </li>
+                                    </div>
+                                </div>
+                            </div>
+                            <div t-if="!widget.isArchived &amp;&amp; widget.documentActionRules.length" class="d-inline sd_btn_actions">
+                                <button class="btn dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" title="Actions">
+                                    <i class="fa fa-gear"/>
+                                </button>
+                                <div class="dropdown-menu actions_menu" aria-labelledby="dropdownMenuButton">
+                                    <t t-foreach="widget.documentActionRules" t-as="rule">
+                                        <a class="dropdown-item" href="#" t-att-data-id="rule.id"><t t-esc="rule.name"/></a>
+                                    </t>
+                                </div>
+                            </div>
+                            <div class="chatter position-absolute"/>
+                            <button t-if="widget.records[0].data.active" class="o_active btn fa fa-archive sd_btn_archive" title="Archive"/>
+                            <button t-if="!widget.records[0].data.active" class="o_active btn fa fa-undo sd_btn_un_archive" title="Restore"/>
+                            <button t-if="!widget.isArchived &amp;&amp; widget.recordIDs.length == 1" class="o_active btn fa fa-retweet sd_btn_replace" title="Replace"/>
+                            <div t-if="!widget.isArchived &amp;&amp; !_.isEmpty(widget.correspondingRecords)" class="d-inline sd_btn_records">
+                                <button type="button" class="btn btn-secondary dropdown-toggle" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" title="records">
+                                    <span class="fa fa-file-text"/>
+                                </button>
+                                <div class="dropdown-menu action_records" aria-labelledby="dropdownMenuButton">
+                                    <t t-foreach="widget.correspondingRecords" t-as="record">
+                                        <a class="js_open_corresponding_record dropdown-item" href="#" t-att-data-id="record.id" t-att-data-model="record.res_model"><t t-esc="record.display_name"/></a>
+                                    </t>
+                                </div>
+                            </div>
+                            <span t-if="widget.recordIDs.length > 1" class="pull-right sd_documents">
+                                <t t-esc="widget.recordIDs.length"/> documents selected
+                            </span>
+                        </div>
+                    </div>
+                </t>
+            </div>
+        </div>
+    </t>
+
+    <div t-name="DashboardView.buttons">
+        <button type="button" t-attf-class="btn btn-primary sd_dashboard_upload" disabled="true">Upload</button>
+        <button type="button" t-attf-class="btn btn-primary sd_dashboard_url" disabled="true">Add URL</button>
+        <button type="button" t-attf-class="btn btn-primary sd_dashboard_request" disabled="true">Request Document</button>
+        <button type="button" t-attf-class="btn btn-primary sd_dashboard_share" disabled="true">Share</button>
+    </div>
+
+    <t t-name="FileUploader">
+        <input type="file" name="files[]" multiple="multiple"/>
+    </t>
+
+    <t t-name="DashboardChatter">
+        <div class="sd_chatter p-relative bg-white h-100"/>
+    </t>
+
+    <t t-name="DashBoard.Edit">
+        <form class="sd_edit_record_form">
+            <div class="form-group row" t-if="name">
+                <label for="name" class="col-sm-2 col-form-label">Name</label>
+                <div class="col-sm-10">
+                    <input type="text" class="form-control" id="name" name="name" t-att-value="name"/>
+                </div>
+            </div>
+            <div class="form-group row" t-if="url">
+                <label for="url" class="col-sm-2 col-form-label">Url</label>
+                <div class="col-sm-10">
+                    <input type="text" class="form-control" id="url" name="url" t-att-value="url"/>
+                </div>
+            </div>
+        </form>
+    </t>
+
+</templates>

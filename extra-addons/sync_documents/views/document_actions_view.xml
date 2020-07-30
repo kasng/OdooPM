@@ -1,0 +1,126 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <record id="document_action_search_view" model="ir.ui.view">
+        <field name="name">document.action.rule.search</field>
+        <field name="model">document.action.rule</field>
+        <field name="arch" type="xml">
+            <search>
+                <field name="name"/>
+                <group expand="1" string="Group By">
+                    <filter string="Folder" name='folder' context="{'group_by':'folder_id'}"/>
+                </group>
+            </search>
+        </field>
+    </record>
+
+    <record id="document_action_tree_view" model="ir.ui.view">
+        <field name="name">document.action.rule.tree</field>
+        <field name="model">document.action.rule</field>
+        <field name="arch" type="xml">
+            <tree>
+                <field name="name" string="Name"/>
+                <field name="folder_id" string="Folder"/>
+                <field name="create_date"/>
+            </tree>
+        </field>
+    </record>
+
+    <record id="document_action_form_view" model="ir.ui.view">
+        <field name="name">document.action.rule.form</field>
+        <field name="model">document.action.rule</field>
+        <field name="arch" type="xml">
+            <form>
+                <sheet>
+                    <div class="oe_title">
+                        <label for="name" class="oe_edit_only"/>
+                        <h1>
+                            <field name="name"/>
+                        </h1>
+                        <field name="action_tooltip" placeholder="Action Tooltip"/>
+                    </div>
+                    <notebook>
+                        <page string="Action">
+                            <group>
+                                <group>
+                                    <field name="user_id"/>
+                                </group>
+                                <group>
+                                    <field name="move_folder_id"/>
+                                    <field name="is_create_model" invisible="1"/>
+                                    <field name="create_model" attrs="{'invisible': [('is_create_model', '=', False)]}"/>
+                                </group>
+                            </group>
+                            <group>
+                                <field name="document_action_ids">
+                                    <tree editable="bottom">
+                                        <field name="action"/>
+                                        <field name="category_tag_id" domain="['|', ('folder_id', 'parent_of', parent.folder_id), ('folder_id', 'parent_of', parent.move_folder_id)]" required="1"/>
+                                        <field name="folder_tag_id" domain="[('tag_id', '=', category_tag_id)]"/>
+                                    </tree>
+                                </field>
+                            </group>
+                            <group string="Activity">
+                                <group>
+                                    <field name="is_mark_done_activity"/>
+                                    <field name="is_schedule_activity"/>
+                                </group>
+                            </group>
+                            <group attrs="{'invisible': [('is_schedule_activity', '=', False)]}">
+                                <group>
+                                    <field name="activity_type_id" options="{'no_create': True, 'no_open': True}" attrs="{'required': [('is_schedule_activity', '=', True)]}"/>
+                                    <field name="activity_summary" placeholder="e.g. Discuss proposal"/>
+                                </group>
+                                <group>
+                                    <label for="activity_date_deadline_range"/>
+                                    <div class="o_row">
+                                        <field name="activity_date_deadline_range"/>
+                                        <field name="activity_date_deadline_range_type"/>
+                                    </div>
+                                    <field name="activity_user_id"/>
+                                </group>
+                                <field name="activity_note" placeholder="Log a note..."/>
+                            </group>
+                        </page>
+                        <page string="Condition">
+                            <group>
+                                <group>
+                                    <field name="folder_id" required="1" readonly="context.get('view_from_folder', 0)"/>
+                                    <field name="condition_type" widget="radio"/>
+                                </group>
+                            </group>
+                            <group>
+                                <field name="domain" string="Domain" nolabel="1" widget="domain" colspan="2" options="{'model':'ir.attachment'}" attrs="{ 'invisible' : ['|',('condition_type', '=', 'criteria'),('condition_type', '=', False)]}"/>
+                            </group>
+                            <group attrs="{ 'invisible' : ['|',('condition_type', '=', 'domain'), ('condition_type', '=', False)]}">
+                                <group string="Tags">
+                                    <field name="included_tag_ids" domain="[('id', 'not in', excluded_tag_ids), ('folder_id', '=', folder_id)]" widget="many2many_tags"/>
+                                    <field name="excluded_tag_ids" domain="[('id', 'not in', included_tag_ids), ('folder_id', '=', folder_id)]" widget="many2many_tags"/>
+                                </group>
+                                <group string="Miscellaneous">
+                                    <field name="condition_user_id"/>
+                                </group>
+                            </group>
+                        </page>
+                    </notebook>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+    <record id="action_document_action_rule" model="ir.actions.act_window">
+        <field name="name">Actions</field>
+        <field name="res_model">document.action.rule</field>
+        <field name="view_mode">tree,form</field>
+        <field name="help" type="html">
+            <p class="o_view_nocontent_smiling_face">
+                Create a new Action
+            </p><p>
+                Actions allows you to perform certain operations.
+            </p>
+        </field>
+    </record>
+
+    <menuitem name="Actions" id="sync_documents_actions" action="action_document_action_rule" parent="sync_documents.sync_documents_config" sequence="4" groups="sync_documents.group_document_manager"/>
+
+</odoo>

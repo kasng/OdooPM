@@ -1,0 +1,85 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="folder_tag_search_view" model="ir.ui.view">
+        <field name="name">Folder tag search</field>
+        <field name="model">folder.tag</field>
+        <field name="arch" type="xml">
+            <search>
+                <field name="name"/>
+                <field name="folder_id"/>
+            </search>
+        </field>
+    </record>
+
+    <record id="tag_tree_view" model="ir.ui.view">
+        <field name="name">tag.tree.view</field>
+        <field name="model">tag.tag</field>
+        <field name="arch" type="xml">
+            <tree default_order="sequence">
+                <field name="sequence" widget="handle"/>
+                <field name="name"/>
+                <field name="folder_id"/>
+            </tree>
+        </field>
+    </record>
+
+    <record id="tag_form_view" model="ir.ui.view">
+        <field name="name">tag.form</field>
+        <field name="model">tag.tag</field>
+        <field name="priority" eval="2"/>
+        <field name="arch" type="xml">
+            <form>
+                <sheet>
+                    <div class="oe_title">
+                        <label for="name" class="oe_edit_only"/>
+                        <h1>
+                            <field name="name"/>
+                        </h1>
+                    </div>
+                    <notebook>
+                        <page string="Tags">
+                            <field name="tag_ids">
+                                <tree editable="bottom">
+                                    <field name="sequence" widget="handle"/>
+                                    <field name="name"/>
+                                </tree>
+                            </field>
+                        </page>
+                    </notebook>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+    <record id="tag_form_display_view" model="ir.ui.view">
+        <field name="name">tag.display.form</field>
+        <field name="model">tag.tag</field>
+        <field name="priority" eval="1"/>
+        <field name="mode">primary</field>
+        <field name="inherit_id" ref="sync_documents.tag_form_view"/>
+        <field name="arch" type="xml">
+            <xpath expr="//div[hasclass('oe_title')]" position="after">
+                <group>
+                    <field name="folder_id" required="1"/>
+                </group>
+            </xpath>
+        </field>
+    </record>
+
+    <record model="ir.actions.act_window" id="action_tags">
+        <field name="name">Tags</field>
+        <field name="res_model">tag.tag</field>
+        <field name="view_mode">tree,form</field>
+        <field name="view_ids" eval="[(5, 0, 0),
+            (0, 0, {'view_mode': 'tree', 'view_id': ref('sync_documents.tag_tree_view')}),
+            (0, 0, {'view_mode': 'form', 'view_id': ref('sync_documents.tag_form_display_view')})]"/>
+        <field name="help" type="html">
+            <p class="o_view_nocontent_smiling_face">
+                Create a new Tag.
+            </p>
+        </field>
+    </record>
+
+    <menuitem name="Tags" id="sync_documents_tags" action="action_tags" parent="sync_documents.sync_documents_config" sequence="3"/>
+
+</odoo>

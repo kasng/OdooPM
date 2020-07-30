@@ -22,6 +22,17 @@ services:
     restart: always
     ports:
       - 5432:5432
+  pgAdmin:
+    restart: always
+    image: dpage/pgadmin4
+    ports:
+      - "8000:80"
+    environment:
+      PGADMIN_DEFAULT_EMAIL: 1234@admin.com
+      PGADMIN_DEFAULT_PASSWORD: 1234
+    volumes:
+      - pgadmin:/var/lib/pgadmin
 volumes:
   odoo-web-data:
   odoo-db-data:
+  pgadmin:

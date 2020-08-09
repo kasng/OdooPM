@@ -248,8 +248,11 @@ odoo.define('sync_documents.DashboardKanbanController', function (require) {
             });
         },
         _renderDocumentManager: function (state, recordIDs) {
+            var self = this;
+
             const destroyDashboardManager = () => {
                 if (this.dashboardManager) {
+                    self.$el.find('.dashboard-manager-wrap').removeClass('is-active');
                     this.dashboardManager.destroy();
                 }
                 ;
@@ -260,8 +263,6 @@ odoo.define('sync_documents.DashboardKanbanController', function (require) {
                 return false;
             }
             ;
-
-            var self = this;
             var tags = [], removeTags = [], tagsByIDs = [];
 
             _.each(state.data, function (record) {
@@ -302,6 +303,7 @@ odoo.define('sync_documents.DashboardKanbanController', function (require) {
             if (!_.isEmpty(recordIDs)) {
                 this.dashboardManager = new DashboardManager(this, params);
                 this.dashboardManager.appendTo(this.$('.dashboard-manager-wrap'));
+                this.$('.dashboard-manager-wrap').addClass('is-active');
             }
             ;
         },

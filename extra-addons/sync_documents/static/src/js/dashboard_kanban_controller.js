@@ -73,14 +73,16 @@ odoo.define('sync_documents.DashboardKanbanController', function (require) {
             self.chatter = new Chatter(self, record, mailFields, options);
             return self.chatter.appendTo($chatterBlock).then(function () {
                 self.$el.find('.sd_documents_dashboard').addClass('sd_chatter_open').append($chatterBlock);
+                if (self.isClosedChatter && true === self.isClosedChatter) {
+                    return self.closeChatter();
+                }
             });
         },
         _loadChatter: function (record) {
             console.error(record);
-            this.isClosedChatter = false;
             var self = this;
             return this.model.fetchSpecialData(record.id).then(function () {
-                self._onCloseChatter();
+                self.closeChatter();
                 record = self.model.get(record.id);
                 var options = {
                     display_log_button: true,
@@ -95,13 +97,18 @@ odoo.define('sync_documents.DashboardKanbanController', function (require) {
             });
         },
         _onCloseChatter: function () {
+            this.closeChatter();
+            this.isClosedChatter = true;
+        },
+
+        closeChatter: function () {
             this.$el.find('.sd_documents_dashboard').removeClass('sd_chatter_open');
             this.$('.sd_chatter').remove();
             if (this.chatter) {
                 this.chatter.destroy();
-                this.isClosedChatter = true;
             }
         },
+
         _onReplaceFile: function (ev) {
             var self = this;
             var $upload_input = $('<input type="file" name="files[]"/>');
@@ -166,6 +173,7 @@ odoo.define('sync_documents.DashboardKanbanController', function (require) {
             ev.stopPropagation();
             var state = this.model.get(this.handle);
             var record = _.findWhere(state.data, {id: ev.data.id});
+            this.isClosedChatter = false;
             this._loadChatter(record);
         },
         _onArchiveDocument: function (ev) {
@@ -223,18 +231,16 @@ odoo.define('sync_documents.DashboardKanbanController', function (require) {
         },
         _rerenderChatter: function (state) {
             var self = this;
-            if (!this.isClosedChatter || true !== this.isClosedChatter) {
-                if (this.chatter) {
-                    if (this.recordIDs.length === 1) { //&& this.$el.hasClass('sd_chatter_open')
-                        var record = _.findWhere(state.data, {res_id: this.recordIDs[0]});
-                        if (record) {
-                            return self._loadChatter(record);
-                        }
-                        ;
+            if (this.chatter) {
+                if (this.recordIDs.length === 1) { //&& this.$el.hasClass('sd_chatter_open')
+                    var record = _.findWhere(state.data, {res_id: this.recordIDs[0]});
+                    if (record) {
+                        return self._loadChatter(record);
                     }
                     ;
-                    self._onCloseChatter();
                 }
+                ;
+                self._onCloseChatter();
             }
             return Promise.resolve();
         },

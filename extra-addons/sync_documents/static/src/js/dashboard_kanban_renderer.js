@@ -19,6 +19,7 @@ var DashboardKanbanRenderer = KanbanRenderer.extend({
                     class: 'sd_dashboard_body d-flex flex-column',
                 }));
                 self.setElement(self.$el);
+                self.$el.parent().append('<div class="dashboard-manager-wrap"></div>');
             });
         });
     },

@@ -77,6 +77,7 @@ odoo.define('sync_documents.DashboardKanbanController', function (require) {
         },
         _loadChatter: function (record) {
             console.error(record);
+            this.isClosedChatter = false;
             var self = this;
             return this.model.fetchSpecialData(record.id).then(function () {
                 self._onCloseChatter();
@@ -300,7 +301,7 @@ odoo.define('sync_documents.DashboardKanbanController', function (require) {
             destroyDashboardManager();
             if (!_.isEmpty(recordIDs)) {
                 this.dashboardManager = new DashboardManager(this, params);
-                this.dashboardManager.appendTo(this.$('.sd_dashboard_body'));
+                this.dashboardManager.appendTo(this.$('.dashboard-manager-wrap'));
             }
             ;
         },

@@ -230,6 +230,10 @@
             }
         }
 
+        .dashboard-manager-wrap {
+            min-height: 43px;
+        }
+
         .sd_documents_manager {
             flex: 0 0 0;
             background-color: #f4f4f4;
@@ -330,8 +334,8 @@
         }
 
         .sd_chatter {
-            max-width: 400px;
-            min-width: 350px;
+            max-width: 600px;
+            min-width: 500px;
             overflow: auto;
             .o_chatter_topbar {
                 flex-wrap: wrap;

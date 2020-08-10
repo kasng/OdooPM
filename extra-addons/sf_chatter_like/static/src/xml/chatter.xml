@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<templates id="template" xml:space="preserve">
+    <t t-name="react.template">
+        <div class="_partnerLiked">
+            <ul>
+                <t t-foreach="message.liked_partner_name" t-as="partnerName">
+                    <li><a><t t-esc="partnerName" /></a></li>
+                </t>
+            </ul>
+        </div>
+    </t>
+    <t t-extend="mail.widget.Thread.Message">
+        <t t-jquery=".o_thread_message_core .o_mail_info" t-operation="append">
+            <span class="o_react tooltip_liked" t-att-liked="message.liked" t-att-data-message-id="message.getID()">
+                <span class="spSvg" t-att-data-message-id="message.getID()">
+                    <svg viewBox="0 0 24 24" preserveAspectRatio="xMidYMid meet" focusable="false" class="style-scope yt-icon" style="pointer-events: none;display: block;width: 100%;height: 100%;">
+                        <g class="style-scope yt-icon" >
+                            <path d="M1 21h4V9H1v12zm22-11c0-1.1-.9-2-2-2h-6.31l.95-4.57.03-.32c0-.41-.17-.79-.44-1.06L14.17 1 7.59 7.59C7.22 7.95 7 8.45 7 9v10c0 1.1.9 2 2 2h9c.83 0 1.54-.5 1.84-1.22l3.02-7.05c.09-.23.14-.47.14-.73v-1.91l-.01-.01L23 10z" fill="#8f908f" class="style-scope yt-icon"></path>
+                        </g>
+                    </svg>
+                </span>
+                <t t-if="message.liked_partner_ids">
+                    <span class="spTooltip" data-toggle="tooltip" t-att-data-message-id="message.getID()"><t t-esc="message.liked_partner_ids.length" /></span>
+                </t>
+                <!--<i class="fa fa-thumbs-up tooltip_liked" data-original-title="" title="" t-att-data-message-id="message.getID()">-->
+                    <!--<span data-toggle="tooltip"><t t-esc="message.liked_partner_ids.length" /></span>-->
+                    <!--<t t-if="message.liked_partner_name.length">-->
+                        <!--<span class="_partnerLiked">-->
+                            <!--<span class="arr"></span>-->
+                            <!--<ul>-->
+                                <!--<t t-foreach="message.liked_partner_name" t-as="partnerName">-->
+                                    <!--<li><a><t t-esc="partnerName" /></a></li>-->
+                                <!--</t>-->
+                            <!--</ul>-->
+                        <!--</span>-->
+                    <!--</t>-->
+                <!--</i>-->
+            </span>
+        </t>
+        <!--<t t-jquery=".o_thread_message_core .o_mail_info" t-operation="append">-->
+<!--&lt;!&ndash;mail.ChatThread.Message&ndash;&gt;-->
+            <!--&lt;!&ndash;mail.widget.Thread.Message&ndash;&gt;-->
+        <!--&lt;!&ndash;</t>&ndash;&gt;-->
+        <!--&lt;!&ndash;<t t-jquery=".o_thread_message_content" t-operation="after">&ndash;&gt;-->
+            <!--<div class="o_react" t-att-liked="message.liked">-->
+                <!--<i class="fa fa-thumbs-up tooltip_liked" data-original-title="" title="" t-att-data-message-id="message.getID()">-->
+                    <!--<span data-toggle="tooltip"><t t-esc="message.liked_partner_ids.length" /></span>-->
+                    <!--<t t-if="message.liked_partner_name.length">-->
+                        <!--<div class="_partnerLiked">-->
+                            <!--<div class="arr"></div>-->
+                            <!--<ul>-->
+                                <!--<t t-foreach="message.liked_partner_name" t-as="partnerName">-->
+                                    <!--<li><a><t t-esc="partnerName" /></a></li>-->
+                                <!--</t>-->
+                            <!--</ul>-->
+                        <!--</div>-->
+                    <!--</t>-->
+                <!--</i>-->
+            <!--</div>-->
+        <!--</t>-->
+    </t>
+</templates>

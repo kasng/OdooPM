@@ -1,0 +1,101 @@
+.o_form_view, .o_mail_discuss {
+    .o_thread_message_core {
+      &:hover{
+        .o_react {
+          display: inline-block;
+        }
+      }
+    }
+    .o_mail_info {
+      display: inline-block;
+      margin-bottom: 3px !important;
+    }
+    .o_react[liked='true'] {
+      display: inline-block;
+        .spSvg {
+          path {
+            fill: #0f69c1;
+          }
+        }
+      }
+    .o_react {
+      display: none;
+      //padding: 5px;
+      //width: 16px;
+      //vertical-align: middle;
+      vertical-align: bottom;
+      cursor: pointer;
+      margin-top: -1px;
+      .spSvg {
+        width: 16px;
+        margin-bottom: -2px;
+        display: inline-block;
+      }
+      .spTooltip {
+        display: inline-block;
+        vertical-align: top;
+        margin-top: -1px;
+        margin-left: 2px;
+      }
+      i {
+        font-size: 16px;
+        cursor: pointer;
+        color: #acb5bd;
+        span {
+          &:hover {
+            text-decoration: underline;
+          }
+          color: #333333;
+          font-family: serif;
+          margin-left: 5px;
+          font-size: 14px;
+        }
+      }
+
+      i:hover {
+        color: #2196F3;
+        ._partnerLiked {
+          display: block;
+        }
+      }
+      i.active {
+        color: #bebebe;
+      }
+      ._partnerLiked {
+        display: none;
+        position: absolute;
+        z-index: 10;
+        min-width: 70px;
+        margin-top: 10px;
+        ul {
+          margin: 0px;
+          list-style: none;
+          background: white;
+          border: 1px solid #cdcdcd;
+          padding: 5px 10px;
+          li {
+            a {
+              font-size: 13px;
+              color: #454545;
+              font-family: sans-serif;
+            }
+          }
+        }
+      }
+    }
+}
+._partnerLiked {
+  ul {
+    margin: 0px;
+    list-style: none;
+    background: white;
+    padding: 5px 10px;
+    li {
+      a {
+        font-size: 13px;
+        color: #454545;
+        font-family: sans-serif;
+      }
+    }
+  }
+}

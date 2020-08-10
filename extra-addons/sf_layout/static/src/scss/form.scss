@@ -1,0 +1,438 @@
+.o_form_view {
+  .o_horizontal_separator {
+    font-weight: normal;
+    color: #333;
+  }
+
+  .o_form_statusbar {
+    & > .o_statusbar_status {
+      border-radius: 11px;
+      overflow: hidden;
+      height: 22px;
+      margin: 6px 14px 6px 0;
+
+      .dropdown-menu .dropdown-item.btn {
+        text-transform: unset;
+      }
+
+      &._noChatter {
+        //margin-right: calc((100% - 1140px + 16px) / 1.5);
+      }
+
+      & > .o_arrow_button {
+        color: #666;
+        background-color: #e9ecef;
+        font-size: 1.0rem;
+        //text-transform: unset;
+        min-width: 90px;
+        font-weight: 100;
+
+        &:last-child {
+          border-left: unset;
+        }
+
+        &.btn-primary.disabled {
+          background: #e9ecef; //#0f69c1;
+          color: #0f69c1; // #FFF;
+          font-size: 1.0rem;
+
+          &::after {
+            border-left-color: #e9ecef; //#0f69c1;
+          }
+        }
+
+        &:not(:first-child) {
+          &::after {
+            border-left-color: #e9ecef;
+          }
+
+          &::before {
+            right: -12px;
+            border-left-color: #FFF;
+          }
+        }
+
+      }
+    }
+  }
+
+  // group: remove border right
+  .o_group {
+    .o_td_label {
+      border-right: transparent;
+
+      .o_form_label {
+        white-space: unset;
+      }
+    }
+  }
+
+  // notebook - common
+  .nav-tabs .nav-link {
+    &:hover {
+      border-color: transparent;
+    }
+
+    &.active {
+      border: unset;
+      border-bottom: 3px solid #30528a;
+      font-weight: bold;
+      color: #30528a;
+    }
+  }
+
+  // notebook - sf_wrapper
+  .o_notebook.sf_wrapper,
+  .o_notebook.wrapper {
+    .nav-tabs .nav-link {
+        &.active {
+            border: 1px solid #ddd;
+            border-bottom: 1px solid #FFF;
+            border-top: 3px solid;
+            border-radius: 0;
+            &::after {
+                content: '';
+                display: block;
+                background: transparent;
+                width: 1px;
+                height: 1px;
+            }
+        }
+      }
+  }
+
+  // Chatter
+  .o_chatter.o_chatter_composer_active .o_chatter_topbar > .btn.o_active {
+    color: #30528a;
+    background-color: transparent;
+    border: unset;
+    border-bottom: 3px solid #30528a;
+    font-weight: bold;
+  }
+
+  .o_thread_composer {
+    background: white;
+  }
+
+  .o_mail_thread .o_thread_message.o_mail_not_discussion {
+    background: transparent;
+    border-bottom: unset;
+  }
+}
+.o_form_buttons_edit, .o_form_buttons_view, .o_list_buttons, .o_statusbar_status, .o_chatter_topbar {
+  button {
+    &.btn-secondary {
+      font-weight: 600;
+    }
+    text-transform: uppercase;
+  }
+}
+.o_form_view {
+  .o_notebook {
+    .nav-tabs {
+      margin-left: -32px;
+      padding-left: 32px;
+      margin-right: -32px;
+      .nav-item {
+        margin-bottom: -1px;
+        .nav-link {
+          border: 1px solid #ced4da;
+          margin-left: -1px;
+          border-radius: 0px;
+          &.active {
+            border: 1px solid #ced4da;
+            border-top: 2px solid #30528a;
+            border-bottom: 0px;
+          }
+        }
+      }
+    }
+  }
+}
+// layout for chatter
+// bring chatter to right and width 30%
+$chatter-width: 30%;
+.o_form_view {
+  .o_form_sheet_bg {
+    -webkit-box-flex: 1;
+    -webkit-flex: 3 1 auto;
+    flex: 3 1 auto;
+    background: #f9f9f9;
+    border-bottom: 1px solid #dee2e6;
+    overflow-y: scroll;
+
+    .o_form_sheet {
+      overflow-x: auto !important;
+    }
+  }
+
+  & > .oe_chatter {
+    &._nHeadB {
+      .o_chatter_topbar {
+        border-bottom: 1px solid #cdcdcd;
+      }
+    }
+
+    -webkit-box-flex: 1;
+    -webkit-flex: 3 1 auto;
+    flex: 3 1 auto;
+    width: 100%;
+    margin-right: auto;
+    margin-left: auto;
+    padding: 0;
+    min-width: unset;
+
+    .o_chatter_button_new_message, .o_chatter_button_log_note, .o_topbar_right_area {
+      border: 0;
+    }
+
+    .o_chatter_topbar {
+      margin-top: unset;
+      border-bottom: 1px solid #eee;
+
+      .btn {
+        flex: 1 1 auto;
+      }
+    }
+
+    .o_thread_date_separator {
+      border-bottom: 1px solid #ced4da;
+      margin-right: 20px;
+      margin-left: 20px;
+    }
+
+    .o_thread_composer:not(.o_chat_mini_composer) {
+      border-left: unset;
+      border-right: unset;
+      border: unset;
+    }
+    .o_attachments_previews {
+      .o_attachment_delete_cross {
+        &:hover {
+          color: #FF5722;
+        }
+        position: absolute;
+        right: 3px;
+        top: 2px;
+      }
+
+      .o_attachment_title {
+        bottom: 0px;
+        font-size: 10px;
+      }
+
+      .o_attachment_download {
+        &:hover {
+          i {
+            color: #4CAF50 !important;
+          }
+        }
+
+        left: 3px;
+        top: 0px;
+        bottom: auto;
+        right: auto;
+      }
+    }
+
+    .o_attachments_list {
+      .o_attachment_wrap {
+        .o_attachment_delete_cross {
+          display: none;
+          position: absolute;
+          right: 5px;
+        }
+
+        .o_attachment_download {
+          display: none;
+        }
+      }
+
+      .o_attachment_wrap:hover {
+        padding-right: 25px;
+        overflow: hidden;
+
+        .o_attachment_delete_cross {
+          &:hover {
+            color: #FF5722;
+          }
+
+          display: block;
+        }
+
+        .o_attachment_download {
+          &:hover {
+            color: #4CAF50;
+          }
+
+          display: initial;
+          position: absolute;
+          right: 6px;
+        }
+      }
+    }
+  }
+}
+.o_form_sheet_bg {
+  padding: 0px 12px 12px 12px !important;
+  .o_form_statusbar {
+    margin-right: -12px;
+    margin-left: -12px;
+  }
+}
+@media (min-width: 576px) {
+  .o_form_view > .oe_chatter {
+    max-width: 540px;
+  }
+}
+
+@media (min-width: 768px) {
+  .o_form_view {
+    display: -webkit-box;
+    display: -webkit-flex;
+    display: flex;
+    -webkit-flex-flow: column nowrap;
+    //flex-flow: row nowrap;
+    flex-flow: column nowrap;
+    min-height: 100%;
+    .o_form_sheet_bg {
+      width: 100%;
+      overflow: inherit;
+    }
+    & > .oe_chatter {
+      max-width: 720px;
+      border-left: 1px solid #dee2e6;
+    }
+  }
+}
+
+@media (min-width: 992px) {
+  .o_form_view > .oe_chatter {
+    max-width: 960px;
+  }
+
+  .o_attachment {
+    width: auto;
+  }
+}
+
+@media (min-width: 1200px) {
+  .o_form_view > .o_form_sheet_bg {
+    width: 100%;
+  }
+  .o_form_view > .oe_chatter {
+    max-width: 1140px;
+    border: 0px;
+    .o_chatter_topbar {
+      //border-bottom: 0px;
+    }
+    .o_thread_date_separator {
+      //margin-right: 0px;
+      //margin-left: 0px;
+    }
+    //width: $chatter-width;
+  }
+}
+.modal-dialog .o_form_sheet_bg {
+  overflow-y: auto !important;
+}
+@media (min-width: 1534px) {
+  .o_form_view:not(.o_form_nosheet) {
+    -webkit-flex-flow: row nowrap;
+    flex-flow: row nowrap;
+    height: 100%;
+
+    & > .o_form_sheet_bg {
+      -webkit-box-flex: 1;
+      -webkit-flex: 3 1 auto;
+      flex: 3 1 auto;
+      width: calc(100% - #{$chatter-width});
+      overflow: auto;
+      overflow-y: scroll;
+      border-bottom: none;
+    }
+
+    .oe_chatter {
+      -webkit-box-flex: 1;
+      -webkit-flex: 1 1 auto;
+      flex: 1 1 auto;
+      width: $chatter-width;
+      padding: 0;
+      overflow: auto;
+      background-color: white;
+      .o_chatter_topbar {
+        //border-bottom: 1px solid #eee;
+      }
+      .o_thread_date_separator {
+        //margin-right: 30px;
+        //margin-left: 30px;
+      }
+    }
+  }
+}
+
+// end: layout for chatter
+ .o_field_widget.o_field_empty {
+    display: block !important;
+ }
+.o_progressbar.o_field_widget {
+  background: #eaeaea !important;
+}
+// border fields in form
+$field-border-color: #ddd;
+.o_form_view.o_form_readonly {
+  .o_group.o_inner_group.oe_subtotal_footer > tbody > tr > td .o_field_widget {
+    // không boder ở phần tổng đơn hàng
+    border-bottom: unset !important;
+  }
+
+  .o_group:not(.oe_subtotal_footer) {
+    .o_td_label + td {
+      > :not(.o_field_x2many_list):not(.o_field_boolean):nth-child(1) {
+        border-bottom: 1px solid $field-border-color;
+        display: flex;
+        min-height: 20px;
+
+        > * {
+          padding-right: 4px;
+        }
+      }
+
+      > .o_address_format {
+        display: block !important;
+      }
+
+      > .o_form_uri:not(.o_invisible_modifier) {
+        display: block !important;
+      }
+    }
+  }
+
+  .o_field_widget.o_field_empty:not(.o_invisible_modifier):not(.oe_inline) {
+    display: block !important;
+    font-size: 0;
+    pointer-events: none;
+    cursor: default;
+  }
+
+  .o_field_text.o_field_widget.o_field_empty:not(.o_invisible_modifier):not(.o_readonly_modifier) {
+    min-height: 20px;
+    border-bottom: 1px solid $field-border-color;
+  }
+}
+
+// Fix overflow not scroll if table too much content td
+.o_form_view {
+  .o_field_widget {
+    &.o_field_one2many,
+    &.o_field_many2many {
+      overflow: auto;
+    }
+  }
+}
+
+// Keep o_external_button closer to m2o field
+.o_field_widget.o_field_many2one .o_external_button {
+    padding: 0 2px !important;
+    font-size: 1.3rem;
+}

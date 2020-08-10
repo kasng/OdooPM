@@ -99,6 +99,9 @@ odoo.define('sync_documents.DashboardKanbanController', function (require) {
         _onCloseChatter: function () {
             this.closeChatter();
             this.isClosedChatter = true;
+            if (this._oldSearchPanel && !this._searchPanel) {
+             this._searchPanel = _.clone(this._oldSearchPanel);
+            }
         },
 
         closeChatter: function () {
@@ -174,6 +177,8 @@ odoo.define('sync_documents.DashboardKanbanController', function (require) {
             var state = this.model.get(this.handle);
             var record = _.findWhere(state.data, {id: ev.data.id});
             this.isClosedChatter = false;
+            this._oldSearchPanel = _.clone(this._searchPanel);
+            this._searchPanel = null;
             this._loadChatter(record);
         },
         _onArchiveDocument: function (ev) {
@@ -249,12 +254,17 @@ odoo.define('sync_documents.DashboardKanbanController', function (require) {
             return this._super.apply(this, arguments).then(function () {
                 var state = self.model.get(self.handle);
                 return self._rerenderChatter(state).then(() => {
-                    self._renderDocumentManager(state);
+                    self._renderDocumentManager(state, self.recordIDs);
                 });
             });
         },
         _renderDocumentManager: function (state, recordIDs) {
             var self = this;
+            console.log(recordIDs);
+
+            if (this._oldSearchPanel && !this._searchPanel) {
+             this._searchPanel = _.clone(this._oldSearchPanel);
+            }
 
             const destroyDashboardManager = () => {
                 if (this.dashboardManager) {
@@ -310,12 +320,18 @@ odoo.define('sync_documents.DashboardKanbanController', function (require) {
                 this.dashboardManager = new DashboardManager(this, params);
                 this.dashboardManager.appendTo(this.$('.dashboard-manager-wrap'));
                 this.$('.dashboard-manager-wrap').addClass('is-active');
+                if (recordIDs.length === 1) {
+                    console.log('=============');
+                    console.log(this.$('.sf-doc-' + recordIDs[0]));
+                    this.$('.sf-doc-' + recordIDs[0]).addClass('sd_record_selected');
+                }
             }
             ;
         },
         _onRecordSelect: function (recordIDs) {
             var self = this;
             var state = this.model.get(this.handle);
+            state.currentRecords = recordIDs;
             this._rerenderChatter(state).then(function () {
                 self._renderDocumentManager(state, recordIDs);
             });

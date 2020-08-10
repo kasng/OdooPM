@@ -81,7 +81,7 @@
                 <templates>
                     <t t-name="kanban-box">
                         <t t-set="fileType" t-value="record.type.raw_value === 'empty'"/>
-                        <div t-attf-class="oe_kanban_global_area o_kanban_attachment #{fileType ? 'sd_type_request' : ''} #{record.active.raw_value ? '': 'o_archived_document' }">
+                        <div t-attf-class="oe_kanban_global_area o_kanban_attachment sf-doc-#{record.id.raw_value} #{fileType ? 'sd_type_request' : ''} #{record.active.raw_value ? '': 'o_archived_document' }">
                             <div t-attf-class="o_kanban_image #{fileType ? 'sd_request_image' : ''}">
                                 <t t-set="webimage" t-value="new RegExp('image.*(gif|jpeg|jpg|png)').test(record.mimetype.raw_value)"/>
                                 <t t-set="binaryPreviewable" t-value="new RegExp('(image|video|application/pdf)').test(record.mimetype.raw_value) &amp;&amp; record.type.raw_value === 'binary'"/>

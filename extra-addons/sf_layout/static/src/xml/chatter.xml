@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<templates id="template" xml:space="preserve">
+
+    <!--Thay text button chatter-->
+    <t t-extend="mail.chatter.Buttons">
+        <t t-jquery=".o_chatter_button_new_message" t-operation="replace">
+            <button t-if="newMessageButton" type="button" class="btn btn-link o_chatter_button_new_message" title="Send a message" disabled="disabled">
+                <span>Message</span>
+            </button>
+        </t>
+        <t t-jquery=".o_chatter_button_schedule_activity" t-operation="replace">
+            <button t-if="scheduleActivityButton" class="btn btn-link o_chatter_button_schedule_activity" title="Log or schedule an activity" disabled="disabled">
+                <i class="fa fa-clock-o" role="img" aria-label="Dates" title="Dates"/>
+            </button>
+        </t>
+    </t>
+    <t t-extend="mail.Followers">
+        <t t-jquery=".o_followers_follow_button" t-operation="replace">
+            <button class="btn btn-link o_followers_follow_button o_followers_notfollow">
+                <span class="o_follow">FL</span>
+                <span class="fa fa-times o_followers_unfollow"/>
+                <span class="o_followers_unfollow"> UFL</span>
+                <span class="fa fa-check o_followers_following"/>
+                <span class="o_followers_following"> FL</span>
+            </button>
+        </t>
+    </t>
+</templates>

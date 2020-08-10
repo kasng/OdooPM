@@ -1,0 +1,100 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- xml:space="preserve"-->
+<templates id="template">
+    <header t-extend="Menu">
+        <!--Ẩn tiêu đề lớn mỗi menu app-->
+        <t t-jquery=".o_menu_brand" t-operation="attributes">
+            <attribute name="class">o_menu_brand</attribute>
+        </t>
+        <t t-jquery=".o_main_navbar" t-operation="after">
+            <div class="sf_line"/>
+        </t>
+    </header>
+
+    <!--App menu-->
+    <t t-extend="AppsMenu">
+        <t t-jquery="li.dropdown" t-operation="replace">
+            <li class="sf_app_menu">
+                <a class="full sf_open_menu _aMenu" data-toggle="x-dropdown" data-display="static">
+                    <i class="fa fa-th sf_menu"/>
+                </a>
+                <div class="sf_menu_content" role="menu">
+                    <div class="sf_menu_overlay"/>
+                    <div class="arrow-up"> </div>
+                    <div class="sf_menu_list">
+                        <div class="sf_menu_group">
+                            <t t-foreach="widget._apps" t-as="app">
+                                <a role="menuitem" t-attf-href="#menu_id=#{app.menuID}"
+                                   class="o_app sf_menu_item"
+                                   t-att-data-menu-id="app.menuID"
+                                   t-att-data-menu-xmlid="app.xmlID"
+                                   t-att-data-action-id="app.actionID">
+                                    <img class="sf_app_menu_icon"
+                                         t-attf-src="data:image/png;base64,#{app.web_icon_data}"/>
+                                    <span t-att-title="app.name" class="sf_app_name" t-esc="app.name"/>
+                                </a>
+                            </t>
+                        </div>
+                    </div>
+                </div>
+            </li>
+        </t>
+    </t>
+
+
+    <!--Menu app items (base)-->
+    <t t-name="Menu.link">
+        <t t-set="depth" t-value="(depth || 0) + 1"/>
+        <t t-if="!menu.children.length">
+            <t t-set="_link">
+                <a role="menuitem"
+                   t-attf-href="#menu_id=#{menu.id}&amp;action=#{menu.action ? menu.action.split(',')[1] : ''}"
+                   t-att-data-menu="menu.id" t-att-data-action-model="menu.action ? menu.action.split(',')[0] : ''"
+                   t-att-data-action-id="menu.action ? menu.action.split(',')[1] : ''"
+                   t-att-data-menu-xmlid="menu.xmlid"
+                   t-attf-class="#{inNavbar ? '' : 'dropdown-item f_menu_open_dropdown '}o_menu_entry_lvl_#{depth}"
+                   data-toggle="collapse" data-target="#o_navbar_collapse.in">
+                    <span>
+                        <t t-esc="menu.name"/>
+                    </span>
+                </a>
+            </t>
+            <li t-if="inNavbar">
+                <t t-raw="_link"/>
+            </li>
+            <t t-else="">
+                <t t-raw="_link"/>
+            </t>
+        </t>
+        <t t-else="">
+
+            <!--Sửa và thay thế từ đây-->
+            <div class="sf_dropdown">
+                <a href="#" class="dropdown-item sf_menu_open_dropdown" t-att-data-menu-xmlid="menu.xmlid"
+                   data-toggle="dropdown" data-display="static" role="button" type="button" aria-expanded="false">
+                    <span>
+                        <t t-esc="menu.name"/>
+                    </span>
+                </a>
+                <div class="dropdown-menu sf_dropdown_menu" role="menu">
+                    <t t-foreach="menu.children" t-as="menu">
+                        <t t-call="Menu.link">
+                            <t t-set="depth" t-value="1"/>
+                            <t t-set="menu" t-value="menu"/>
+                        </t>
+                    </t>
+                </div>
+            </div>
+            <!--End - Sửa và thay thế từ đây-->
+
+        </t>
+    </t>
+
+    <!--Thêm icon down cho menu-->
+    <t t-extend="Menu.sections">
+        <t t-jquery=".dropdown-toggle.o-no-caret.o_menu_header_lvl_1" t-operation="attributes">
+            <attribute name="class">dropdown-toggle o-no-caret sf-caret o_menu_header_lvl_1</attribute>
+        </t>
+    </t>
+
+</templates>

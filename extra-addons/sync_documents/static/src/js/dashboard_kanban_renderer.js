@@ -41,6 +41,11 @@ odoo.define('sync_documents.DashboardKanbanRenderer', function (require) {
                 widget.selectRecord(isSelected);
             });
         },
+
+        getLocalState: function () {
+            this.state.testKEy = 'value';
+            return this.state;
+        },
     });
 
     return DashboardKanbanRenderer;

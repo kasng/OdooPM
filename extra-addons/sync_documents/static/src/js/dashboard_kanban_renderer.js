@@ -46,7 +46,7 @@ odoo.define('sync_documents.DashboardKanbanRenderer', function (require) {
         },
         _render: function () {
             var self = this;
-            this._super.apply(this, arguments).then(function () {
+            return this._super.apply(this, arguments).then(function () {
                 if (self.currentRecords && self.currentRecords.length === 1) {
                     self.$el.find('.sf-doc-' + self.currentRecords[0]).addClass('sd_record_selected');
                 }

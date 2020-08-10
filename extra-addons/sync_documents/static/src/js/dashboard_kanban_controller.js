@@ -260,7 +260,6 @@ odoo.define('sync_documents.DashboardKanbanController', function (require) {
         },
         _renderDocumentManager: function (state, recordIDs) {
             var self = this;
-            console.log(recordIDs);
 
             if (this._oldSearchPanel && !this._searchPanel) {
              this._searchPanel = _.clone(this._oldSearchPanel);
@@ -321,8 +320,6 @@ odoo.define('sync_documents.DashboardKanbanController', function (require) {
                 this.dashboardManager.appendTo(this.$('.dashboard-manager-wrap'));
                 this.$('.dashboard-manager-wrap').addClass('is-active');
                 if (recordIDs.length === 1) {
-                    console.log('=============');
-                    console.log(this.$('.sf-doc-' + recordIDs[0]));
                     this.$('.sf-doc-' + recordIDs[0]).addClass('sd_record_selected');
                 }
             }

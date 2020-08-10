@@ -22,7 +22,6 @@ odoo.define('sync_documents.DashboardRecord', function (require) {
         _onAttachmentRequest: function (ev) {
             ev.preventDefault();
             ev.stopPropagation();
-            console.log(this.id);
             this.trigger_up('on_upload_attachment', {id: this.id});
         },
         update: function () {

@@ -24,6 +24,8 @@ odoo.define('sync_documents.DashboardKanbanRenderer', function (require) {
             });
         },
         _onCheckSelection: function (recordIDs) {
+            console.log(recordIDs);
+            this.currentRecords = recordIDs;
             if (recordIDs.length !== 0) {
                 this.$el.closest('.sd_documents_dashboard').addClass('sd_open_manager')
                     .removeClass('sd_selected_records')
@@ -35,17 +37,21 @@ odoo.define('sync_documents.DashboardKanbanRenderer', function (require) {
             }
         },
         selectRecord: function (recordIDs) {
+            console.log(recordIDs);
             this._onCheckSelection(recordIDs);
             _.each(this.widgets, function (widget) {
                 var isSelected = _.contains(recordIDs, widget.getID());
                 widget.selectRecord(isSelected);
             });
         },
-
-        getLocalState: function () {
-            this.state.testKEy = 'value';
-            return this.state;
-        },
+        _render: function () {
+            var self = this;
+            this._super.apply(this, arguments).then(function () {
+                if (self.currentRecords && self.currentRecords.length === 1) {
+                    self.$el.find('.sf-doc-' + self.currentRecords[0]).addClass('sd_record_selected');
+                }
+            });
+        }
     });
 
     return DashboardKanbanRenderer;

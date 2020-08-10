@@ -99,9 +99,6 @@ odoo.define('sync_documents.DashboardKanbanController', function (require) {
         _onCloseChatter: function () {
             this.closeChatter();
             this.isClosedChatter = true;
-            if (this._oldSearchPanel && !this._searchPanel) {
-             this._searchPanel = _.clone(this._oldSearchPanel);
-            }
         },
 
         closeChatter: function () {
@@ -177,8 +174,6 @@ odoo.define('sync_documents.DashboardKanbanController', function (require) {
             var state = this.model.get(this.handle);
             var record = _.findWhere(state.data, {id: ev.data.id});
             this.isClosedChatter = false;
-            this._oldSearchPanel = _.clone(this._searchPanel);
-            this._searchPanel = null;
             this._loadChatter(record);
         },
         _onArchiveDocument: function (ev) {
@@ -260,10 +255,6 @@ odoo.define('sync_documents.DashboardKanbanController', function (require) {
         },
         _renderDocumentManager: function (state, recordIDs) {
             var self = this;
-
-            if (this._oldSearchPanel && !this._searchPanel) {
-             this._searchPanel = _.clone(this._oldSearchPanel);
-            }
 
             const destroyDashboardManager = () => {
                 if (this.dashboardManager) {
@@ -366,7 +357,9 @@ odoo.define('sync_documents.DashboardKanbanController', function (require) {
                 method: 'write',
                 args: [recordID, form_values],
             }).then(function () {
-                return self.reload();
+                self.reload().then(function () {
+                    self.$('.sf-doc-' + recordID).addClass('sd_record_selected');
+                });
             });
         },
         _onSaveRecord: function (ev, recordID) {

@@ -49,6 +49,8 @@ var AbstractDashboard = KanbanView.extend({
             'url',
         ];
         _.defaults(this.fieldsInfo[this.viewType], _.pick(this.fields, extraFields));
+        
+        console.log('init');
     },
 });
 

@@ -101,9 +101,6 @@ odoo.define('sync_documents.DashboardCommonController', function (require) {
 
         _updateButtons: function () {
             this._super.apply(this, arguments);
-            if (this._oldSearchPanel && !this._searchPanel) {
-                this._searchPanel = _.clone(this._oldSearchPanel);
-            }
             const selectedFolderId = this._searchPanel.get_selected_folder_id();
             this.$buttons.find('.sd_dashboard_upload').prop('disabled', !selectedFolderId);
             this.$buttons.find('.sd_dashboard_url').prop('disabled', !selectedFolderId);

@@ -242,8 +242,9 @@
 
     .dashboard-manager-wrap {
       &.is-active {
-        min-height: 43px;
+
       }
+      min-height: 43px;
     }
 
     .sd_documents_manager {

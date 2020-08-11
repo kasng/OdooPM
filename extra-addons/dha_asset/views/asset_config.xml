@@ -1,0 +1,439 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+
+    <!--Unit of Measure-->
+    <!--+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++-->
+
+    <record id='as_unit_action' model='ir.actions.act_window'>
+        <field name="name">Unit of Measure</field>
+        <field name="res_model">as.unit</field>
+        <field name="view_mode">tree,form</field>
+    </record>
+
+    <!-- Form View -->
+    <record id="as_unit_view_form" model="ir.ui.view">
+        <field name="name">Unit of Measure Form</field>
+        <field name="model">as.unit</field>
+        <field name="arch" type="xml">
+            <form>
+                <group>
+                    <group>
+                        <field name="name"/>
+                        <field name="description"/>
+                    </group>
+                </group>
+            </form>
+        </field>
+    </record>
+
+    <!-- Tree(list) View -->
+    <record id="as_unit_view_tree" model="ir.ui.view">
+        <field name="name">Unit of Measure Tree</field>
+        <field name="model">as.unit</field>
+        <field name="arch" type="xml">
+            <tree>
+                <field name="name"/>
+                <field name="description"/>
+            </tree>
+        </field>
+    </record>
+
+    <!-- Search View -->
+    <record id="as_unit_view_search" model="ir.ui.view">
+        <field name="name">Unit of Measure Search</field>
+        <field name="model">as.unit</field>
+        <field name="arch" type="xml">
+            <search>
+                <field name="name"/>
+                <field name="description"/>
+            </search>
+        </field>
+    </record>
+
+
+
+    <!--Fuel Type-->
+    <!--+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++-->
+
+    <record id='as_fuel_type_action' model='ir.actions.act_window'>
+        <field name="name">Fuel Type</field>
+        <field name="res_model">as.fuel.type</field>
+        <field name="view_mode">tree,form</field>
+    </record>
+
+    <!-- Form View -->
+    <record id="as_fuel_type_view_form" model="ir.ui.view">
+        <field name="name">Fuel Type Form</field>
+        <field name="model">as.fuel.type</field>
+        <field name="arch" type="xml">
+            <form>
+                <group>
+                    <group>
+                        <field name="name"/>
+                        <field name="description"/>
+                    </group>
+                </group>
+            </form>
+        </field>
+    </record>
+
+    <!-- Tree(list) View -->
+    <record id="as_fuel_type_view_tree" model="ir.ui.view">
+        <field name="name">Fuel Type Tree</field>
+        <field name="model">as.fuel.type</field>
+        <field name="arch" type="xml">
+            <tree>
+                <field name="name"/>
+                <field name="description"/>
+            </tree>
+        </field>
+    </record>
+
+    <!-- Search View -->
+    <record id="as_fuel_type_view_search" model="ir.ui.view">
+        <field name="name">Fuel Type Search</field>
+        <field name="model">as.fuel.type</field>
+        <field name="arch" type="xml">
+            <search>
+                <field name="name"/>
+                <field name="description"/>
+            </search>
+        </field>
+    </record>
+
+
+
+
+
+    <!--Meter-->
+    <!--+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++-->
+
+    <record id='as_meter_meter_action' model='ir.actions.act_window'>
+        <field name="name">Meter</field>
+        <field name="res_model">as.meter</field>
+        <field name="view_mode">tree,form</field>
+    </record>
+
+    <!-- Form View -->
+    <record id="as_meter_meter_view_form" model="ir.ui.view">
+        <field name="name">Meter Form</field>
+        <field name="model">as.meter</field>
+        <field name="arch" type="xml">
+            <form>
+                <sheet>
+                    <group>
+                        <div class="oe_title">
+                            <h1>
+                                <field name="name"/>
+                            </h1>
+                        </div>
+                    </group>
+                    <group>
+                        <group>
+                            <field name="description"/>
+                            <field name="meter_type"/>
+                        </group>
+                        <group>
+                            <field name="unit_id"/>
+                            <field name="reading_type"/>
+                        </group>
+                    </group>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+    <!-- Tree(list) View -->
+    <record id="as_meter_meter_view_tree" model="ir.ui.view">
+        <field name="name">Meter Tree</field>
+        <field name="model">as.meter</field>
+        <field name="arch" type="xml">
+            <tree>
+                <field name="name"/>
+                <field name="description"/>
+                <field name="meter_type"/>
+                <field name="unit_id"/>
+                <field name="reading_type"/>
+            </tree>
+        </field>
+    </record>
+
+    <!-- Search View -->
+    <record id="as_meter_meter_view_search" model="ir.ui.view">
+        <field name="name">Meter Search</field>
+        <field name="model">as.meter</field>
+        <field name="arch" type="xml">
+            <search>
+                <field name="name"/>
+                <field name="description"/>
+            </search>
+        </field>
+    </record>
+
+
+
+
+
+
+    <!--Meter Group-->
+    <!--+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++-->
+
+    <record id='as_meter_group_action' model='ir.actions.act_window'>
+        <field name="name">Meter Group</field>
+        <field name="res_model">as.meter.group</field>
+        <field name="view_mode">tree,form</field>
+    </record>
+
+    <!-- Form View -->
+    <record id="as_meter_group_view_form" model="ir.ui.view">
+        <field name="name">Meter Group Form</field>
+        <field name="model">as.meter.group</field>
+        <field name="arch" type="xml">
+            <form>
+                <sheet>
+                    <group>
+                        <div class="oe_title">
+                            <h1>
+                                <field name="name"/>
+                            </h1>
+                        </div>
+                    </group>
+                    <group>
+                        <group>
+                            <field name="description"/>
+                        </group>
+                    </group>
+                    <label string="List Meter" for="meter_ids"/>
+                    <group>
+                        <field name="meter_ids" nolabel="1"/>
+                    </group>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+    <!-- Tree(list) View -->
+    <record id="as_meter_group_view_tree" model="ir.ui.view">
+        <field name="name">Meter Group Tree</field>
+        <field name="model">as.meter.group</field>
+        <field name="arch" type="xml">
+            <tree>
+                <field name="name"/>
+                <field name="description"/>
+            </tree>
+        </field>
+    </record>
+
+    <!-- Search View -->
+    <record id="as_meter_group_view_search" model="ir.ui.view">
+        <field name="name">Meter Group Search</field>
+        <field name="model">as.meter.group</field>
+        <field name="arch" type="xml">
+            <search>
+                <field name="name"/>
+                <field name="description"/>
+            </search>
+        </field>
+    </record>
+
+
+
+
+    <!--Meter Usage-->
+    <!--+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++-->
+
+    <record id='as_meter_usage_action' model='ir.actions.act_window'>
+        <field name="name">Meter Usage</field>
+        <field name="res_model">as.meter.usage</field>
+        <field name="view_mode">tree,form</field>
+    </record>
+
+    <!-- Form View -->
+    <record id="as_meter_usage_view_form" model="ir.ui.view">
+        <field name="name">Meter Usage Form</field>
+        <field name="model">as.meter.usage</field>
+        <field name="arch" type="xml">
+            <form>
+                <sheet>
+                    <group>
+                        <group>
+                            <field name="meter_id"/>
+                            <field name="description"/>
+                            <field name="meter_type"/>
+                            <field name="reading_type"/>
+                            <field name="unit_id"/>
+                        </group>
+                        <group>
+                            <field name="last_reading"/>
+                            <field name="last_reading_time"/>
+                            <field name="is_fuel"/>
+                            <field name="fuel_type_id"/>
+                        </group>
+                    </group>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+    <!-- Tree(list) View -->
+    <record id="as_meter_usage_view_tree" model="ir.ui.view">
+        <field name="name">Meter Usage Tree</field>
+        <field name="model">as.meter.usage</field>
+        <field name="arch" type="xml">
+            <tree>
+                <field name="meter_id"/>
+                <field name="description"/>
+                <field name="meter_type"/>
+                <field name="reading_type"/>
+                <field name="unit_id"/>
+                <field name="last_reading"/>
+                <field name="last_reading_time"/>
+                <field name="is_fuel"/>
+            </tree>
+        </field>
+    </record>
+
+    <!-- Search View -->
+    <record id="as_meter_usage_view_search" model="ir.ui.view">
+        <field name="name">Meter Usage Search</field>
+        <field name="model">as.meter.usage</field>
+        <field name="arch" type="xml">
+            <search>
+                <field name="name"/>
+                <field name="description"/>
+            </search>
+        </field>
+    </record>
+
+
+
+
+    <!--Attribute-->
+    <!--+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++-->
+
+    <record id='as_spec_attribute_action' model='ir.actions.act_window'>
+        <field name="name">Attribute</field>
+        <field name="res_model">as.spec.attribute</field>
+        <field name="view_mode">tree,form</field>
+    </record>
+
+    <!-- Form View -->
+    <record id="as_spec_attribute_view_form" model="ir.ui.view">
+        <field name="name">Attribute Form</field>
+        <field name="model">as.spec.attribute</field>
+        <field name="arch" type="xml">
+            <form>
+                <sheet>
+                    <group>
+                        <div class="oe_title">
+                            <h1>
+                                <field name="name"/>
+                            </h1>
+                        </div>
+                    </group>
+                    <group>
+                        <group>
+                            <field name="description"/>
+                            <field name="unit_id"/>
+                        </group>
+                    </group>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+    <!-- Tree(list) View -->
+    <record id="as_spec_attribute_view_tree" model="ir.ui.view">
+        <field name="name">Attribute Tree</field>
+        <field name="model">as.spec.attribute</field>
+        <field name="arch" type="xml">
+            <tree>
+                <field name="name"/>
+                <field name="description"/>
+                <field name="unit_id"/>
+            </tree>
+        </field>
+    </record>
+
+    <!-- Search View -->
+    <record id="as_spec_attribute_view_search" model="ir.ui.view">
+        <field name="name">Attribute Search</field>
+        <field name="model">as.spec.attribute</field>
+        <field name="arch" type="xml">
+            <search>
+                <field name="name"/>
+                <field name="description"/>
+            </search>
+        </field>
+    </record>
+
+
+
+
+    <!--Classification-->
+    <!--+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++-->
+
+    <record id='as_spec_class_action' model='ir.actions.act_window'>
+        <field name="name">Classification</field>
+        <field name="res_model">as.spec.class</field>
+        <field name="view_mode">tree,form</field>
+    </record>
+
+    <!-- Form View -->
+    <record id="as_spec_class_view_form" model="ir.ui.view">
+        <field name="name">Classification Form</field>
+        <field name="model">as.spec.class</field>
+        <field name="arch" type="xml">
+            <form>
+                <sheet>
+                    <group>
+                        <div class="oe_title">
+                            <h1>
+                                <field name="name"/>
+                            </h1>
+                        </div>
+                    </group>
+                    <group>
+                        <group>
+                            <field name="description"/>
+                        </group>
+                    </group>
+                    <label string="List Attribute" for="attribute_ids"/>
+                    <group>
+                        <field name="attribute_ids" nolabel="1"/>
+                    </group>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+    <!-- Tree(list) View -->
+    <record id="as_spec_class_view_tree" model="ir.ui.view">
+        <field name="name">Classification Tree</field>
+        <field name="model">as.spec.class</field>
+        <field name="arch" type="xml">
+            <tree>
+                <field name="name"/>
+                <field name="description"/>
+            </tree>
+        </field>
+    </record>
+
+    <!-- Search View -->
+    <record id="as_spec_class_view_search" model="ir.ui.view">
+        <field name="name">Classification Search</field>
+        <field name="model">as.spec.class</field>
+        <field name="arch" type="xml">
+            <search>
+                <field name="name"/>
+                <field name="description"/>
+            </search>
+        </field>
+    </record>
+
+
+
+
+
+</odoo>

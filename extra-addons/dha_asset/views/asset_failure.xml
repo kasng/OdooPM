@@ -1,0 +1,249 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+
+    <!--Remedy-->
+    <!--+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++-->
+
+    <record id='as_fail_remedy_action' model='ir.actions.act_window'>
+        <field name="name">Remedy</field>
+        <field name="res_model">as.fail.remedy</field>
+        <field name="view_mode">tree,form</field>
+    </record>
+
+    <!-- Form View -->
+    <record id="as_fail_remedy_view_form" model="ir.ui.view">
+        <field name="name">Remedy Form</field>
+        <field name="model">as.fail.remedy</field>
+        <field name="arch" type="xml">
+            <form>
+                <group>
+                    <group>
+                        <field name="name"/>
+                        <field name="description"/>
+                    </group>
+                </group>
+            </form>
+        </field>
+    </record>
+
+    <!-- Tree(list) View -->
+    <record id="as_fail_remedy_view_tree" model="ir.ui.view">
+        <field name="name">Remedy Tree</field>
+        <field name="model">as.fail.remedy</field>
+        <field name="arch" type="xml">
+            <tree>
+                <field name="name"/>
+                <field name="description"/>
+            </tree>
+        </field>
+    </record>
+
+    <!-- Search View -->
+    <record id="as_fail_remedy_view_search" model="ir.ui.view">
+        <field name="name">Remedy Search</field>
+        <field name="model">as.fail.remedy</field>
+        <field name="arch" type="xml">
+            <search>
+                <field name="name"/>
+                <field name="description"/>
+            </search>
+        </field>
+    </record>
+
+
+
+
+    <!--Cause-->
+    <!--+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++-->
+
+    <record id='as_fail_cause_action' model='ir.actions.act_window'>
+        <field name="name">Cause</field>
+        <field name="res_model">as.fail.cause</field>
+        <field name="view_mode">tree,form</field>
+    </record>
+
+    <!-- Form View -->
+    <record id="as_fail_cause_view_form" model="ir.ui.view">
+        <field name="name">Cause Form</field>
+        <field name="model">as.fail.cause</field>
+        <field name="arch" type="xml">
+            <form>
+                <sheet>
+                    <group>
+                        <div class="oe_title">
+                            <h1>
+                                <field name="name"/>
+                            </h1>
+                        </div>
+                    </group>
+                    <group>
+                        <group>
+                            <field name="description"/>
+                        </group>
+                    </group>
+                    <label string="List Remedy" for="remedy_ids"/>
+                    <group>
+                        <field name="remedy_ids" nolabel="1"/>
+                    </group>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+    <!-- Tree(list) View -->
+    <record id="as_fail_cause_view_tree" model="ir.ui.view">
+        <field name="name">Cause Tree</field>
+        <field name="model">as.fail.cause</field>
+        <field name="arch" type="xml">
+            <tree>
+                <field name="name"/>
+                <field name="description"/>
+            </tree>
+        </field>
+    </record>
+
+    <!-- Search View -->
+    <record id="as_fail_cause_view_search" model="ir.ui.view">
+        <field name="name">Cause Search</field>
+        <field name="model">as.fail.cause</field>
+        <field name="arch" type="xml">
+            <search>
+                <field name="name"/>
+                <field name="description"/>
+            </search>
+        </field>
+    </record>
+
+
+
+
+    <!--Problem-->
+    <!--+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++-->
+
+    <record id='as_fail_problem_action' model='ir.actions.act_window'>
+        <field name="name">Problem</field>
+        <field name="res_model">as.fail.problem</field>
+        <field name="view_mode">tree,form</field>
+    </record>
+
+    <!-- Form View -->
+    <record id="as_fail_problem_view_form" model="ir.ui.view">
+        <field name="name">Problem Form</field>
+        <field name="model">as.fail.problem</field>
+        <field name="arch" type="xml">
+            <form>
+                <sheet>
+                    <group>
+                        <div class="oe_title">
+                            <h1>
+                                <field name="name"/>
+                            </h1>
+                        </div>
+                    </group>
+                    <group>
+                        <group>
+                            <field name="description"/>
+                        </group>
+                    </group>
+                    <label string="List Cause" for="cause_ids"/>
+                    <group>
+                        <field name="cause_ids" nolabel="1"/>
+                    </group>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+    <!-- Tree(list) View -->
+    <record id="as_fail_problem_view_tree" model="ir.ui.view">
+        <field name="name">Problem Tree</field>
+        <field name="model">as.fail.problem</field>
+        <field name="arch" type="xml">
+            <tree>
+                <field name="name"/>
+                <field name="description"/>
+            </tree>
+        </field>
+    </record>
+
+    <!-- Search View -->
+    <record id="as_fail_problem_view_search" model="ir.ui.view">
+        <field name="name">Problem Search</field>
+        <field name="model">as.fail.problem</field>
+        <field name="arch" type="xml">
+            <search>
+                <field name="name"/>
+                <field name="description"/>
+            </search>
+        </field>
+    </record>
+
+
+
+
+    <!--Class-->
+    <!--+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++-->
+
+    <record id='as_fail_class_action' model='ir.actions.act_window'>
+        <field name="name">Class</field>
+        <field name="res_model">as.fail.class</field>
+        <field name="view_mode">tree,form</field>
+    </record>
+
+    <!-- Form View -->
+    <record id="as_fail_class_view_form" model="ir.ui.view">
+        <field name="name">Class Form</field>
+        <field name="model">as.fail.class</field>
+        <field name="arch" type="xml">
+            <form>
+                <sheet>
+                    <group>
+                        <div class="oe_title">
+                            <h1>
+                                <field name="name"/>
+                            </h1>
+                        </div>
+                    </group>
+                    <group>
+                        <group>
+                            <field name="description"/>
+                        </group>
+                    </group>
+                    <label string="List Problem" for="problem_ids"/>
+                    <group>
+                        <field name="problem_ids" nolabel="1"/>
+                    </group>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+    <!-- Tree(list) View -->
+    <record id="as_fail_class_view_tree" model="ir.ui.view">
+        <field name="name">Class Tree</field>
+        <field name="model">as.fail.class</field>
+        <field name="arch" type="xml">
+            <tree>
+                <field name="name"/>
+                <field name="description"/>
+            </tree>
+        </field>
+    </record>
+
+    <!-- Search View -->
+    <record id="as_fail_class_view_search" model="ir.ui.view">
+        <field name="name">Class Search</field>
+        <field name="model">as.fail.class</field>
+        <field name="arch" type="xml">
+            <search>
+                <field name="name"/>
+                <field name="description"/>
+            </search>
+        </field>
+    </record>
+
+
+
+
+</odoo>

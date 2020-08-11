@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <!--Menu System-->
+    <!--+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++-->
+
+    <!--App Menu-->
+    <menuitem name="Asset" id="dha_asset_menu" />
+
+    <!--Asset-->
+    <menuitem name="Asset" id="mnu_asset" parent="dha_asset_menu" sequence="1"/>
+    <menuitem name="Asset" id="mnu_asset_asset" parent="mnu_asset" action="as_asset_asset_action" sequence="1"/>
+    <menuitem name="Location" id="mnu_asset_location" parent="mnu_asset" action="as_location_action" sequence="2"/>
+
+    <!--Service-->
+    <menuitem name="Service" id="mnu_service" parent="dha_asset_menu" sequence="2"/>
+
+    <!--Work Order-->
+    <menuitem name="Work Order" id="mnu_work" parent="dha_asset_menu" sequence="3"/>
+
+    <!--History-->
+    <menuitem name="History" id="mnu_history" parent="dha_asset_menu" sequence="4"/>
+    <menuitem name="Meter History" id="mnu_meter_history" parent="mnu_history" action="as_meter_history_action" sequence="1"/>
+    <menuitem name="Fuel History" id="mnu_fuel_history" parent="mnu_history" action="as_fuel_history_action" sequence="2"/>
+    <menuitem name="Expense History" id="mnu_expense_history" parent="mnu_history" action="as_expense_history_action" sequence="3"/>
+
+
+    <!--Report-->
+    <menuitem name="Report" id="mnu_report" parent="dha_asset_menu" sequence="5"/>
+
+    <!--Configuration-->
+    <menuitem name="Configuration" id="mnu_conf" parent="dha_asset_menu" sequence="6"/>
+
+    <menuitem name="Asset" id="mnu_conf_asset" parent="mnu_conf" sequence="1"/>
+    <menuitem name="Asset Type" id="mnu_conf_asset_type" parent="mnu_conf_asset" action="as_asset_type_action" sequence="1"/>
+    <menuitem name="Asset Group" id="mnu_conf_asset_group" parent="mnu_conf_asset" action="as_asset_group_action"/>
+
+    <menuitem name="Location Type" id="mnu_conf_location_type" parent="mnu_conf" action="as_location_type_action" sequence="2"/>
+    <menuitem name="Unit of Measure" id="mnu_conf_unit" parent="mnu_conf" action="as_unit_action" sequence="3"/>
+    <menuitem name="Fuel Type" id="mnu_conf_fuel" parent="mnu_conf" action="as_fuel_type_action" sequence="4"/>
+
+    <menuitem name="Meter" id="mnu_conf_meter" parent="mnu_conf" sequence="5"/>
+    <menuitem name="Meter" id="mnu_conf_meter_meter" parent="mnu_conf_meter" action="as_meter_meter_action" sequence="1"/>
+    <menuitem name="Meter Group" id="mnu_conf_meter_group" parent="mnu_conf_meter" action="as_meter_group_action"/>
+
+    <menuitem name="Specification" id="mnu_conf_spec" parent="mnu_conf" sequence="6"/>
+    <menuitem name="Attribute" id="mnu_conf_spec_attribute" parent="mnu_conf_spec" action="as_spec_attribute_action" sequence="1"/>
+    <menuitem name="Classification" id="mnu_conf_spec_class" parent="mnu_conf_spec" action="as_spec_class_action"/>
+
+    <menuitem name="Service" id="mnu_conf_service" parent="mnu_conf" sequence="7"/>
+    <menuitem name="Service Type" id="mnu_conf_service_type" parent="mnu_conf_service" action="as_service_type_action" sequence="1"/>
+    <menuitem name="Service Group" id="mnu_conf_service_group" parent="mnu_conf_service" action="as_service_group_action"/>
+
+    <menuitem name="Work Type" id="mnu_conf_work_type" parent="mnu_conf" action="as_work_type_action" sequence="8"/>
+
+    <menuitem name="Failure Code" id="mnu_conf_fail" parent="mnu_conf" sequence="8"/>
+    <menuitem name="Class" id="mnu_conf_fail_class" parent="mnu_conf_fail" action="as_fail_class_action" sequence="1"/>
+    <menuitem name="Problem" id="mnu_conf_fail_problem" parent="mnu_conf_fail" action="as_fail_problem_action" sequence="2"/>
+    <menuitem name="Cause" id="mnu_conf_fail_cause" parent="mnu_conf_fail" action="as_fail_cause_action" sequence="3"/>
+    <menuitem name="Remedy" id="mnu_conf_fail_remedy" parent="mnu_conf_fail" action="as_fail_remedy_action" sequence="4"/>
+
+
+
+</odoo>

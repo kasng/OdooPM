@@ -1,0 +1,111 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+
+    <!--Service Type-->
+    <!--+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++-->
+
+    <record id='as_service_type_action' model='ir.actions.act_window'>
+        <field name="name">Service Type</field>
+        <field name="res_model">as.service.type</field>
+        <field name="view_mode">tree,form</field>
+    </record>
+
+    <!-- Form View -->
+    <record id="as_service_type_view_form" model="ir.ui.view">
+        <field name="name">Service Type Form</field>
+        <field name="model">as.service.type</field>
+        <field name="arch" type="xml">
+            <form>
+                <group>
+                    <group>
+                        <field name="name"/>
+                        <field name="description"/>
+                    </group>
+                </group>
+            </form>
+        </field>
+    </record>
+
+    <!-- Tree(list) View -->
+    <record id="as_service_type_view_tree" model="ir.ui.view">
+        <field name="name">Service Type Tree</field>
+        <field name="model">as.service.type</field>
+        <field name="arch" type="xml">
+            <tree>
+                <field name="name"/>
+                <field name="description"/>
+            </tree>
+        </field>
+    </record>
+
+    <!-- Search View -->
+    <record id="as_service_type_view_search" model="ir.ui.view">
+        <field name="name">Service Type Search</field>
+        <field name="model">as.service.type</field>
+        <field name="arch" type="xml">
+            <search>
+                <field name="name"/>
+                <field name="description"/>
+            </search>
+        </field>
+    </record>
+
+
+
+
+
+    <!--Service Group-->
+    <!--+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++-->
+
+    <record id='as_service_group_action' model='ir.actions.act_window'>
+        <field name="name">Service Group</field>
+        <field name="res_model">as.service.group</field>
+        <field name="view_mode">tree,form</field>
+    </record>
+
+    <!-- Form View -->
+    <record id="as_service_group_view_form" model="ir.ui.view">
+        <field name="name">Service Group Form</field>
+        <field name="model">as.service.group</field>
+        <field name="arch" type="xml">
+            <form>
+                <group>
+                    <group>
+                        <field name="name"/>
+                        <field name="description"/>
+                    </group>
+                </group>
+            </form>
+        </field>
+    </record>
+
+    <!-- Tree(list) View -->
+    <record id="as_service_group_view_tree" model="ir.ui.view">
+        <field name="name">Service Group Tree</field>
+        <field name="model">as.service.group</field>
+        <field name="arch" type="xml">
+            <tree>
+                <field name="name"/>
+                <field name="description"/>
+            </tree>
+        </field>
+    </record>
+
+    <!-- Search View -->
+    <record id="as_service_group_view_search" model="ir.ui.view">
+        <field name="name">Service Group Search</field>
+        <field name="model">as.service.group</field>
+        <field name="arch" type="xml">
+            <search>
+                <field name="name"/>
+                <field name="description"/>
+            </search>
+        </field>
+    </record>
+
+
+
+
+
+</odoo>

@@ -1,0 +1,226 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+
+    <!--Meter History-->
+    <!--+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++-->
+
+    <record id='as_meter_history_action' model='ir.actions.act_window'>
+        <field name="name">Meter History</field>
+        <field name="res_model">as.meter.his</field>
+        <field name="view_mode">tree,form</field>
+    </record>
+
+    <!-- Form View -->
+    <record id="as_meter_history_view_form" model="ir.ui.view">
+        <field name="name">Meter History Form</field>
+        <field name="model">as.meter.his</field>
+        <field name="arch" type="xml">
+            <form>
+                <sheet>
+                    <group>
+                        <group>
+                            <field name="asset_id"/>
+                            <field name="asset_description"/>
+                            <field name="inspector_id"/>
+                            <field name="meter_id"/>
+                            <field name="meter_source"/>
+                        </group>
+                        <group>
+                            <field name="meter_type"/>
+                            <field name="reading_type"/>
+                            <field name="unit_id"/>
+                            <field name="meter_reading"/>
+                            <field name="reading_time"/>
+                        </group>
+                    </group>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+    <!-- Tree(list) View -->
+    <record id="as_meter_history_view_tree" model="ir.ui.view">
+        <field name="name">Meter History Tree</field>
+        <field name="model">as.meter.his</field>
+        <field name="arch" type="xml">
+            <tree>
+                <field name="asset_id"/>
+                <field name="asset_description"/>
+                <field name="inspector_id"/>
+                <field name="meter_source"/>
+                <field name="meter_id"/>
+                <field name="meter_type"/>
+                <field name="reading_type"/>
+                <field name="unit_id"/>
+                <field name="meter_reading"/>
+                <field name="reading_time"/>
+            </tree>
+        </field>
+    </record>
+
+    <!-- Search View -->
+    <record id="as_meter_history_view_search" model="ir.ui.view">
+        <field name="name">Meter History Search</field>
+        <field name="model">as.meter.his</field>
+        <field name="arch" type="xml">
+            <search>
+                <field name="asset_id"/>
+                <field name="asset_description"/>
+                <field name="inspector_id"/>
+                <field name="meter_source"/>
+                <field name="meter_id"/>
+                <field name="meter_type"/>
+                <field name="reading_type"/>
+                <field name="unit_id"/>
+                <field name="meter_reading"/>
+            </search>
+        </field>
+    </record>
+
+
+
+
+    <!--Fuel History-->
+    <!--+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++-->
+
+    <record id='as_fuel_history_action' model='ir.actions.act_window'>
+        <field name="name">Fuel History</field>
+        <field name="res_model">as.fuel.his</field>
+        <field name="view_mode">tree,form</field>
+    </record>
+
+    <!-- Form View -->
+    <record id="as_fuel_history_view_form" model="ir.ui.view">
+        <field name="name">Fuel History Form</field>
+        <field name="model">as.fuel.his</field>
+        <field name="arch" type="xml">
+            <form>
+                <sheet>
+                    <group>
+                        <group>
+                            <field name="asset_id"/>
+                            <field name="asset_description"/>
+                            <field name="inspector_id"/>
+                            <field name="meter_id"/>
+                            <field name="meter_reading"/>
+                            <field name="reading_time"/>
+                        </group>
+                        <group>
+                            <field name="fuel_type_id"/>
+                            <field name="fuel_unit_price"/>
+                            <field name="fuel_entry"/>
+                            <field name="fuel_amount"/>
+                        </group>
+                    </group>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+    <!-- Tree(list) View -->
+    <record id="as_fuel_history_view_tree" model="ir.ui.view">
+        <field name="name">Fuel History Tree</field>
+        <field name="model">as.fuel.his</field>
+        <field name="arch" type="xml">
+            <tree>
+                <field name="asset_id"/>
+                <field name="asset_description"/>
+                <field name="inspector_id"/>
+                <field name="meter_id"/>
+                <field name="meter_reading"/>
+                <field name="reading_time"/>
+                <field name="fuel_type_id"/>
+                <field name="fuel_unit_price"/>
+                <field name="fuel_entry" sum="Total Fuel"/>
+                <field name="fuel_amount" sum="Total Amount"/>
+            </tree>
+        </field>
+    </record>
+
+    <!-- Search View -->
+    <record id="as_fuel_history_view_search" model="ir.ui.view">
+        <field name="name">Fuel History Search</field>
+        <field name="model">as.fuel.his</field>
+        <field name="arch" type="xml">
+            <search>
+                <field name="asset_id"/>
+                <field name="asset_description"/>
+                <field name="inspector_id"/>
+                <field name="meter_id"/>
+                <field name="meter_reading"/>
+                <field name="fuel_type_id"/>
+                <field name="fuel_entry"/>
+                <field name="fuel_amount"/>
+            </search>
+        </field>
+    </record>
+
+
+
+
+    <!--Expense History-->
+    <!--+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++-->
+
+    <record id='as_expense_history_action' model='ir.actions.act_window'>
+        <field name="name">Expense History</field>
+        <field name="res_model">as.expense.his</field>
+        <field name="view_mode">tree,form</field>
+    </record>
+
+    <!-- Form View -->
+    <record id="as_expense_history_view_form" model="ir.ui.view">
+        <field name="name">Expense History Form</field>
+        <field name="model">as.expense.his</field>
+        <field name="arch" type="xml">
+            <form>
+                <sheet>
+                    <group>
+                        <group>
+                            <field name="asset_id"/>
+                            <field name="asset_description"/>
+                            <field name="inspector_id"/>
+                        </group>
+                        <group>
+                            <field name="expense_type"/>
+                            <field name="expense_time"/>
+                            <field name="expense_entry"/>
+                        </group>
+                    </group>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+    <!-- Tree(list) View -->
+    <record id="as_expense_history_view_tree" model="ir.ui.view">
+        <field name="name">Expense History Tree</field>
+        <field name="model">as.expense.his</field>
+        <field name="arch" type="xml">
+            <tree>
+                <field name="asset_id"/>
+                <field name="asset_description"/>
+                <field name="inspector_id"/>
+                <field name="expense_type"/>
+                <field name="expense_time"/>
+                <field name="expense_entry" sum="Total Amount"/>
+            </tree>
+        </field>
+    </record>
+
+    <!-- Search View -->
+    <record id="as_expense_history_view_search" model="ir.ui.view">
+        <field name="name">Expense History Search</field>
+        <field name="model">as.expense.his</field>
+        <field name="arch" type="xml">
+            <search>
+                <field name="asset_id"/>
+                <field name="asset_description"/>
+                <field name="inspector_id"/>
+                <field name="expense_type"/>
+                <field name="expense_entry"/>
+            </search>
+        </field>
+    </record>
+
+</odoo>

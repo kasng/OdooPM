@@ -1,0 +1,110 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+
+    <!--Work Type-->
+    <!--+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++-->
+
+    <record id='as_work_type_action' model='ir.actions.act_window'>
+        <field name="name">Work Type</field>
+        <field name="res_model">as.work.type</field>
+        <field name="view_mode">tree,form</field>
+    </record>
+
+    <!-- Form View -->
+    <record id="as_work_type_view_form" model="ir.ui.view">
+        <field name="name">Work Type Form</field>
+        <field name="model">as.work.type</field>
+        <field name="arch" type="xml">
+            <form>
+                <group>
+                    <group>
+                        <field name="name"/>
+                        <field name="description"/>
+                    </group>
+                </group>
+            </form>
+        </field>
+    </record>
+
+    <!-- Tree(list) View -->
+    <record id="as_work_type_view_tree" model="ir.ui.view">
+        <field name="name">Work Type Tree</field>
+        <field name="model">as.work.type</field>
+        <field name="arch" type="xml">
+            <tree>
+                <field name="name"/>
+                <field name="description"/>
+            </tree>
+        </field>
+    </record>
+
+    <!-- Search View -->
+    <record id="as_work_type_view_search" model="ir.ui.view">
+        <field name="name">Work Type Search</field>
+        <field name="model">as.work.type</field>
+        <field name="arch" type="xml">
+            <search>
+                <field name="name"/>
+                <field name="description"/>
+            </search>
+        </field>
+    </record>
+
+
+    <record id="as_work_order_form_view" model="ir.ui.view">
+        <field name="name">As work order</field>
+        <field name="model">as.work.order</field>
+        <field name="arch" type="xml">
+            <form>
+                <group>
+                    <group>
+                        <field name="name"/>
+                        <field name="description"/>
+                    </group>
+                </group>
+                <notebook>
+                    <page string="Plan">
+                        <notebook>
+                            <page string="Material">
+                                <field name="plan_material_ids">
+                                </field>
+                            </page>
+                        </notebook>
+                        </page>
+                    <page string="Actual">
+                        <notebook>
+                            <page string="Material">
+                                <field name="stock_move_ids">
+                                </field>
+                            </page>
+                        </notebook>
+                    </page>
+                    <notebook>
+                    </notebook>
+                </notebook>
+            </form>
+        </field>
+    </record>
+
+    <record id="as_work_order_tree_view" model="ir.ui.view">
+        <field name="name">As work order tree</field>
+        <field name="model">as.work.order</field>
+        <field name="arch" type="xml">
+            <tree>
+                <field name="name"/>
+                <field name="description"/>
+            </tree>
+        </field>
+    </record>
+
+    <record id='as_work_order_action_view' model='ir.actions.act_window'>
+        <field name="name">As work order</field>
+        <field name="res_model">as.work.order</field>
+        <field name="view_mode">tree,form</field>
+    </record>
+
+<!--    <menuitem name="Work Order" id="wo_menu_action" parent="dha_asset.mnu_work" sequence="10" action="as_work_order_action_view"/>-->
+
+
+</odoo>

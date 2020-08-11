@@ -1,0 +1,289 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+
+    <!--Asset Type-->
+    <!--+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++-->
+
+    <record id='as_asset_type_action' model='ir.actions.act_window'>
+        <field name="name">Asset Type</field>
+        <field name="res_model">as.asset.type</field>
+        <field name="view_mode">tree,form</field>
+    </record>
+
+    <!-- Form View -->
+    <record id="as_asset_type_view_form" model="ir.ui.view">
+        <field name="name">Asset Type Form</field>
+        <field name="model">as.asset.type</field>
+        <field name="arch" type="xml">
+            <form>
+                <group>
+                    <group>
+                        <field name="name"/>
+                        <field name="description"/>
+                    </group>
+                </group>
+            </form>
+        </field>
+    </record>
+
+    <!-- Tree(list) View -->
+    <record id="as_asset_type_view_tree" model="ir.ui.view">
+        <field name="name">Asset Type Tree</field>
+        <field name="model">as.asset.type</field>
+        <field name="arch" type="xml">
+            <tree>
+                <field name="name"/>
+                <field name="description"/>
+            </tree>
+        </field>
+    </record>
+
+    <!-- Search View -->
+    <record id="as_asset_type_view_search" model="ir.ui.view">
+        <field name="name">Asset Type Search</field>
+        <field name="model">as.asset.type</field>
+        <field name="arch" type="xml">
+            <search>
+                <field name="name"/>
+                <field name="description"/>
+            </search>
+        </field>
+    </record>
+
+
+
+
+
+    <!--Asset Group-->
+    <!--+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++-->
+
+    <record id='as_asset_group_action' model='ir.actions.act_window'>
+        <field name="name">Asset Group</field>
+        <field name="res_model">as.asset.group</field>
+        <field name="view_mode">tree,form</field>
+    </record>
+
+    <!-- Form View -->
+    <record id="as_asset_group_view_form" model="ir.ui.view">
+        <field name="name">Asset Group Form</field>
+        <field name="model">as.asset.group</field>
+        <field name="arch" type="xml">
+            <form>
+                <group>
+                    <group>
+                        <field name="name"/>
+                        <field name="description"/>
+                    </group>
+                </group>
+            </form>
+        </field>
+    </record>
+
+    <!-- Tree(list) View -->
+    <record id="as_asset_group_view_tree" model="ir.ui.view">
+        <field name="name">Asset Group Tree</field>
+        <field name="model">as.asset.group</field>
+        <field name="arch" type="xml">
+            <tree>
+                <field name="name"/>
+                <field name="description"/>
+            </tree>
+        </field>
+    </record>
+
+    <!-- Search View -->
+    <record id="as_asset_group_view_search" model="ir.ui.view">
+        <field name="name">Asset Group Search</field>
+        <field name="model">as.asset.group</field>
+        <field name="arch" type="xml">
+            <search>
+                <field name="name"/>
+                <field name="description"/>
+            </search>
+        </field>
+    </record>
+
+
+
+
+    <!--Spare Part-->
+    <!--+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++-->
+
+    <record id='as_spare_part_action' model='ir.actions.act_window'>
+        <field name="name">Spare Part</field>
+        <field name="res_model">as.sparepart</field>
+        <field name="view_mode">tree,form</field>
+    </record>
+
+    <!-- Form View -->
+    <record id="as_spare_part_view_form" model="ir.ui.view">
+        <field name="name">Spare Part Form</field>
+        <field name="model">as.sparepart</field>
+        <field name="arch" type="xml">
+            <form>
+                <group>
+                    <group>
+                        <field name="product_id"/>
+                        <field name="product_code"/>
+                    </group>
+                    <group>
+                        <field name="quantity"/>
+                    </group>
+                </group>
+            </form>
+        </field>
+    </record>
+
+    <!-- Tree(list) View -->
+    <record id="as_spare_part_view_tree" model="ir.ui.view">
+        <field name="name">Spare Part Tree</field>
+        <field name="model">as.sparepart</field>
+        <field name="arch" type="xml">
+            <tree editable="bottom">
+                <field name="product_id"/>
+                <field name="product_code"/>
+                <field name="quantity"/>
+            </tree>
+        </field>
+    </record>
+
+
+
+
+
+    <!--Asset-->
+    <!--+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++-->
+
+    <record id='as_asset_asset_action' model='ir.actions.act_window'>
+        <field name="name">Asset</field>
+        <field name="res_model">as.asset</field>
+        <field name="view_mode">tree,form</field>
+    </record>
+
+    <!-- Form View -->
+    <record id="as_asset_asset_view_form" model="ir.ui.view">
+        <field name="name">Asset Form</field>
+        <field name="model">as.asset</field>
+        <field name="arch" type="xml">
+            <form>
+                <header>
+                    <button name="action_meter_reading" string="Meter Reading" type="object" class="oe_highlight"/>
+                    <button name="action_expense_entry" string="Expense Entry" type="object" class="oe_highlight"/>
+                </header>
+                <sheet>
+                    <div class="oe_button_box" name="button_box">
+                        <button class="oe_stat_button" name="open_asset_children" icon="fa-list-ul" type="object">
+                            <div class="o_field_widget o_stat_info">
+                                <span class="o_stat_value"> <field name="asset_children_count"/></span>
+                                <span class="o_stat_text">Children</span>
+                            </div>
+                        </button>
+                        <button class="oe_stat_button" name="open_meter_history" icon="fa-tachometer" type="object">
+                            <div class="o_field_widget o_stat_info">
+                                <span class="o_stat_value"> <field name="meter_history_count"/></span>
+                                <span class="o_stat_text">Meter</span>
+                            </div>
+                        </button>
+                        <button class="oe_stat_button" name="open_fuel_history" icon="fa-window-maximize" type="object">
+                            <div class="o_field_widget o_stat_info">
+                                <span class="o_stat_value"> <field name="fuel_history_count"/></span>
+                                <span class="o_stat_text">Fuel</span>
+                            </div>
+                        </button>
+                        <button class="oe_stat_button" name="open_expense_history" icon="fa-dollar" type="object">
+                            <div class="o_field_widget o_stat_info">
+                                <span class="o_stat_value"> <field name="expense_history_count"/></span>
+                                <span class="o_stat_text">Expense</span>
+                            </div>
+                        </button>
+                    </div>
+                    <div class="oe_title">
+                        <h1>
+                            <field name="name"/>
+                        </h1>
+                    </div>
+                    <group>
+                        <group>
+                            <field name="description"/>
+                            <field name="registration"/>
+                            <field name="type_id"/>
+                            <field name="group_id"/>
+                            <field name="status"/>
+                            <field name="operator_id"/>
+                        </group>
+                        <group>
+                            <field name="cover" widget="image" class="oe_avatar" img_width="200" img_height="100" width="200" height="100"/>
+                            <field name="parent_id"/>
+                            <field name="company_id"/>
+                        </group>
+                    </group>
+                    <notebook>
+                        <page name="meter_page" string="Meter">
+                            <group>
+                                <group>
+                                    <field name="meter_group_id" string="Meter Group"/>
+                                </group>
+                            </group>
+                            <group>
+                                <field name="meter_usage_ids" nolabel="1"/>
+                            </group>
+                        </page>
+                        <page name="sparepart_page" string="Spare Part">
+                            <group>
+                                <field name="spare_part_ids" nolabel="1"/>
+                            </group>
+                        </page>
+                        <page name="attachment_page" string="Attachment">
+                            <field name="file_ids" widget = 'many2many_binary'/>
+                        </page>
+                    </notebook>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+    <!-- Tree(list) View -->
+    <record id="as_asset_asset_view_tree" model="ir.ui.view">
+        <field name="name">Asset Tree</field>
+        <field name="model">as.asset</field>
+        <field name="arch" type="xml">
+            <tree>
+                <field name="name"/>
+                <field name="description"/>
+                <field name="registration"/>
+                <field name="operator_id"/>
+                <field name="status"/>
+                <field name="type_id"/>
+                <field name="group_id"/>
+                <field name="parent_id"/>
+                <field name="company_id"/>
+            </tree>
+        </field>
+    </record>
+
+    <!-- Search View -->
+    <record id="as_asset_asset_view_search" model="ir.ui.view">
+        <field name="name">Asset Search</field>
+        <field name="model">as.asset</field>
+        <field name="arch" type="xml">
+            <search>
+                <field name="name"/>
+                <field name="description"/>
+                <field name="registration"/>
+                <field name="operator_id"/>
+                <field name="status"/>
+                <field name="type_id"/>
+                <field name="group_id"/>
+                <field name="parent_id"/>
+                <field name="company_id"/>
+            </search>
+        </field>
+    </record>
+
+
+
+
+
+
+</odoo>

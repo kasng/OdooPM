@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <!--Enter Meter Wizard-->
+    <!--+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++-->
+
+    <record id='enter_meter_wizard_form' model='ir.ui.view'>
+        <field name='name'>enter meter wizard form view</field>
+        <field name='model'>as.enter.meter.wizard</field>
+        <field name='arch' type='xml'>
+            <form string="Meter Reading">
+                <sheet>
+                    <field name="meter_usage_ids">
+                        <tree editable="top" create="false" delete="false">
+                            <field name="fields_meter"/>
+                            <field name="fields_reading"/>
+                            <field name="fields_reading_time"/>
+                            <field name="fields_inspector_id"/>
+                            <field name="fields_fuel"/>
+                            <field name="fields_fuel_entry" attrs="{'readonly': [('fields_fuel', '=', False)]}"/>
+                            <field name="fields_fuel_amount" attrs="{'readonly': [('fields_fuel', '=', False)]}"/>
+                        </tree>
+                    </field>
+                </sheet>
+                <footer>
+                    <button string='Save' type='object' name='save_meter_reading'  class='btn-primary'/>
+                    <button string='Cancel' class='btn-default' special='cancel'/>
+                </footer>
+            </form>
+        </field>
+    </record>
+
+
+</odoo>

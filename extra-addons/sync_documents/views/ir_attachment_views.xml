@@ -187,6 +187,11 @@
                         <field name="mimetype"/>
                         <field name="file_size"/>
                     </group>
+
+                    <group>
+                        <field name="excerpt"/>
+                    </group>
+
                 </sheet>
                 <div class="oe_chatter">
                     <field name="message_follower_ids" widget="mail_followers" groups="base.group_user"/>

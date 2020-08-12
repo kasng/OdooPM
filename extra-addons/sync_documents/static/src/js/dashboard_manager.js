@@ -155,6 +155,7 @@ var DashboardManager = Widget.extend({
     _onEditRecord: function () {
         this.trigger_up('on_edit_record', {
             id: this.records[0].id,
+            res_id: this.records[0].res_id
         });
     },
     _onChangeFolder: function (ev) {

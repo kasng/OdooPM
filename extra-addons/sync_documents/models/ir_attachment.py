@@ -16,6 +16,8 @@ class IrAttachment(models.Model):
     active = fields.Boolean(default=True)
     starred_ids = fields.Many2many('res.users', string="Starred")
     user_id = fields.Many2one('res.users', default=lambda self: self.env.user.id, string="Resposible Person")
+    is_operation = fields.Boolean(default=False)
+    excerpt = fields.Text(string='Excerpt')
 
     @api.onchange('folder_id')
     def onchange_folder_id(self):

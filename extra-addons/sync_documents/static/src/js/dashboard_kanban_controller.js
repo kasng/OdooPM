@@ -332,23 +332,37 @@ odoo.define('sync_documents.DashboardKanbanController', function (require) {
             documentViewer.appendTo(this.$('.sd_documents_dashboard_view'));
         },
         _onEditRecord: function (ev) {
+            console.log(ev);
             var self = this, recordID = ev.data.id;
             var record = self.model.get(recordID);
-            return new Dialog(this, {
-                title: _t('Edit Record'),
-                buttons: [{
-                    text: _t('Save'),
-                    classes: 'btn-primary',
-                    close: true,
-                    click: function (ev) {
-                        self._onSaveRecord(ev, record.res_id);
-                    }
-                }, {text: _t('Discard'), close: true}],
-                $content: Qweb.render('DashBoard.Edit', {
-                    'name': record.data.name,
-                    'url': record.data.url
-                }),
-            }).open();
+            console.log(recordID);
+            console.log(ev.data);
+            console.log(String(recordID).replace('ir.attachment_',''));
+            // return new Dialog(this, {
+            //     title: _t('Edit Record'),
+            //     buttons: [{
+            //         text: _t('Save'),
+            //         classes: 'btn-primary',
+            //         close: true,
+            //         click: function (ev) {
+            //             self._onSaveRecord(ev, record.res_id);
+            //         }
+            //     }, {text: _t('Discard'), close: true}],
+            //     $content: Qweb.render('DashBoard.Edit', {
+            //         'name': record.data.name,
+            //         'url': record.data.url
+            //     }),
+            // }).open();
+
+            return this.do_action({
+                type: 'ir.actions.act_window',
+                name: 'sync_documents.attachment_form_view',
+                res_model: 'ir.attachment',
+                views: [[false, 'form']],
+                target: 'current',
+                res_id: Number(String(ev.data.res_id).replace('ir.attachment_','')),
+                view_id: 'attachment_form_view'
+            });
         },
         _updateRecord: function (recordID, form_values) {
             var self = this;

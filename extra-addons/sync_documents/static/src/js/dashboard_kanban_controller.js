@@ -37,7 +37,7 @@ odoo.define('sync_documents.DashboardKanbanController', function (require) {
             on_change_tag: '_onChangeTag',
             on_upload_attachment: '_onUploadAttachment'
         }),
-        init: function () {
+        init: function (parent, model, renderer, params) {
             this._super.apply(this, arguments);
             this.record = this.model.get(this.handle);
             this.recordIDs = [];
@@ -79,7 +79,6 @@ odoo.define('sync_documents.DashboardKanbanController', function (require) {
             });
         },
         _loadChatter: function (record) {
-            console.error(record);
             var self = this;
             return this.model.fetchSpecialData(record.id).then(function () {
                 self.closeChatter();
@@ -332,36 +331,25 @@ odoo.define('sync_documents.DashboardKanbanController', function (require) {
             documentViewer.appendTo(this.$('.sd_documents_dashboard_view'));
         },
         _onEditRecord: function (ev) {
-            console.log(ev);
             var self = this, recordID = ev.data.id;
-            var record = self.model.get(recordID);
-            console.log(recordID);
-            console.log(ev.data);
-            console.log(String(recordID).replace('ir.attachment_',''));
-            // return new Dialog(this, {
-            //     title: _t('Edit Record'),
-            //     buttons: [{
-            //         text: _t('Save'),
-            //         classes: 'btn-primary',
-            //         close: true,
-            //         click: function (ev) {
-            //             self._onSaveRecord(ev, record.res_id);
-            //         }
-            //     }, {text: _t('Discard'), close: true}],
-            //     $content: Qweb.render('DashBoard.Edit', {
-            //         'name': record.data.name,
-            //         'url': record.data.url
-            //     }),
-            // }).open();
-
-            return this.do_action({
-                type: 'ir.actions.act_window',
-                name: 'sync_documents.attachment_form_view',
-                res_model: 'ir.attachment',
-                views: [[false, 'form']],
-                target: 'current',
-                res_id: Number(String(ev.data.res_id).replace('ir.attachment_','')),
-                view_id: 'attachment_form_view'
+            this._rpc({
+                model: 'ir.model.data',
+                method: 'xmlid_to_res_model_res_id',
+                args: ["sync_documents.attachment_form_view"],
+            })
+            .then(function (data) {
+                var state = $.bbq.getState(true);
+                return self.do_action({
+                    type: 'ir.actions.act_window',
+                    name: "Documents Dashboard",
+                    res_model: 'ir.attachment',
+                    views: [[data[1], 'form']],
+                    target: 'current',
+                    res_id: Number(String(ev.data.res_id).replace('ir.attachment_','')),
+                    view_id: 'sync_doc_attachment_form_view',
+                    domain: [['res_field', '=', false], ['folder_id', '!=', false]],
+                    id: state.action
+                });
             });
         },
         _updateRecord: function (recordID, form_values) {

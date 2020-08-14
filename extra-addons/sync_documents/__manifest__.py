@@ -16,7 +16,7 @@ Manage Documents in Odoo.
     """,
     'author': 'Synconics Technologies Pvt. Ltd.',
     'website': 'http://www.synconics.com',
-    'depends': ['base', 'mail', 'portal', 'web'],
+    'depends': ['base', 'mail', 'portal', 'web', 'project'],
     'data': [
         'data/documents_data.xml',
         'security/security.xml',

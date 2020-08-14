@@ -50,6 +50,9 @@
                                     <field name="is_create_model" invisible="1"/>
                                     <field name="create_model" attrs="{'invisible': [('is_create_model', '=', False)]}"/>
                                 </group>
+                                <group>
+                                    <field name="project_id"/>
+                                </group>
                             </group>
                             <group>
                                 <field name="document_action_ids">

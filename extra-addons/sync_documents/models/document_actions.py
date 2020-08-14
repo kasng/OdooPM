@@ -49,6 +49,8 @@ class DocumentAction(models.Model):
         'rule_id', 'tag_id', string='Does not Contains')
     condition_user_id = fields.Many2one('res.users', string='Owner')
 
+    project_id = fields.Many2one('project.project', string='Move to Project')
+
     def create_model_record(self, attachments):
         return True
 
@@ -95,12 +97,28 @@ class DocumentAction(models.Model):
     def action_execute(self, attachments):
         self.ensure_one()
         attachment_ids = self.env['ir.attachment'].browse(attachments)
-
         vals = dict()   # tag_ids=[(6, 0, [])]
         if self.user_id:
             vals.update(user_id=self.user_id.id)
         if self.move_folder_id:
             vals.update(folder_id=self.move_folder_id.id)
+        if self.project_id:
+            # write project id into dha.document
+            for att in attachments:
+                dha_document = self.env['dha.document'].search([('attachment_id', '=', att)], limit=1)
+                if dha_document:
+                    dha_document.write({
+                        'project_id': self.project_id.id,
+                        'moved_date': fields.Datetime.now()
+                    })
+                else:
+                    # Create new
+                    self.env['dha.document'].create({
+                        'project_id': self.project_id.id,
+                        'moved_date': fields.Datetime.now(),
+                        'attachment_id': att
+                    })
+
         attachment_ids.write(vals)
 
         if self.is_mark_done_activity:

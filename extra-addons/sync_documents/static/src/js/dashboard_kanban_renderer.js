@@ -24,7 +24,6 @@ odoo.define('sync_documents.DashboardKanbanRenderer', function (require) {
             });
         },
         _onCheckSelection: function (recordIDs) {
-            console.log(recordIDs);
             this.currentRecords = recordIDs;
             if (recordIDs.length !== 0) {
                 this.$el.closest('.sd_documents_dashboard').addClass('sd_open_manager')
@@ -37,7 +36,6 @@ odoo.define('sync_documents.DashboardKanbanRenderer', function (require) {
             }
         },
         selectRecord: function (recordIDs) {
-            console.log(recordIDs);
             this._onCheckSelection(recordIDs);
             _.each(this.widgets, function (widget) {
                 var isSelected = _.contains(recordIDs, widget.getID());

@@ -47,7 +47,10 @@ odoo.define('sync_documents.DashboardRecord', function (require) {
         },
         _onSelectRecord: function (ev) {
             ev.preventDefault();
-            if (!$(ev.target).hasClass('oe_kanban_action')) {
+            if (!$(ev.target).hasClass('oe_kanban_action')
+                && !$(ev.target).hasClass('o_activity_btn')
+                && !$(ev.target).hasClass('fa')
+            ) {
                 this._onToggleSelect(true, ev);
             }
         },

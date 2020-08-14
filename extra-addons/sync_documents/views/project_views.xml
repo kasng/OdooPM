@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <!-- Project -->
+    <record id="sync_doc_edit_project" model="ir.ui.view">
+        <field name="name">sync_doc.project.project.form</field>
+        <field name="model">project.project</field>
+        <field name="inherit_id" ref="project.edit_project"/>
+        <field name="arch" type="xml">
+            <xpath expr="//button[@name='attachment_tree_view']" position="before">
+                <button class="oe_stat_button" name="sync_attachment_tree_view" type="object" icon="fa-file-text-o">
+                    <field string="Operation Documents" name="sync_doc_count" widget="statinfo"/>
+                </button>
+            </xpath>
+        </field>
+    </record>
+</odoo>

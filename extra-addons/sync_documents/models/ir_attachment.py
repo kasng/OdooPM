@@ -3,6 +3,7 @@
 
 from odoo.osv import expression
 from odoo import api, fields, models
+from bs4 import BeautifulSoup
 
 
 class IrAttachment(models.Model):
@@ -17,7 +18,17 @@ class IrAttachment(models.Model):
     starred_ids = fields.Many2many('res.users', string="Starred")
     user_id = fields.Many2one('res.users', default=lambda self: self.env.user.id, string="Resposible Person")
     is_operation = fields.Boolean(default=False)
+    dha_doc_id = fields.Many2one('dha.document', string='DHA Documents')
     excerpt = fields.Text(string='Excerpt')
+    esc_excerpt = fields.Text(compute='_compute_esc_excerpt')
+
+    def _compute_esc_excerpt(self):
+        for rec in self:
+            if rec.excerpt:
+                soup = BeautifulSoup(rec.excerpt)
+                rec.esc_excerpt = soup.get_text()
+            else:
+                rec.esc_excerpt = None
 
     @api.onchange('folder_id')
     def onchange_folder_id(self):
@@ -50,7 +61,7 @@ class IrAttachment(models.Model):
     @api.model_create_multi
     def create(self, vals_list):
         resources = super(IrAttachment, self).create(vals_list)
-        for resource in resources.filtered(lambda record: record.res_model): 
+        for resource in resources.filtered(lambda record: record.res_model):
             resource._config_settings()
         return resources
 

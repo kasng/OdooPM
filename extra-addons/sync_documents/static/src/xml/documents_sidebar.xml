@@ -125,4 +125,10 @@
         </form>
     </t>
 
+    <t t-name="Document.Excerpt">
+        <div>
+            <t t-raw="excerpt" widget="html"/>
+        </div>
+    </t>
+
 </templates>

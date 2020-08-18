@@ -8,7 +8,8 @@ odoo.define('sync_documents.DashboardRecord', function (require) {
             'click .o_kanban_details': '_onSelectRecord',
             'click .sd_request_image': '_onAttachmentRequest',
             'click .o_kanban_image_preview': '_onAttachmentPreview',
-            'click .sd_record_selector': '_onSelectionOfToggle'
+            'click .sd_record_selector': '_onSelectionOfToggle',
+            'click .o_doc_excerpt': '_onShowExcerpt',
         }),
         start: function () {
             this._super.apply(this, arguments);
@@ -58,8 +59,12 @@ odoo.define('sync_documents.DashboardRecord', function (require) {
             ev.preventDefault();
             ev.stopPropagation();
             this.trigger_up('on_attachment_preview', {record: this.recordData});
+        },
+        _onShowExcerpt: function (ev) {
+            ev.preventDefault();
+            ev.stopPropagation();
+            this.trigger_up('on_show_excerpt', {record: this.recordData});
         }
-
     });
 
     return DashboardRecord;

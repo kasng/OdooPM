@@ -25,6 +25,13 @@
     .o_kanban_details {
       padding-left: 72px !important;
 
+      .o_doc_excerpt {
+        white-space: nowrap;
+        text-overflow: ellipsis;
+        overflow: hidden;
+        width: 95%;
+      }
+
       .o_kanban_details_wrapper .o_kanban_record_body .o_document_url .o_field_url {
         display: contents;
       }
@@ -244,6 +251,7 @@
       &.is-active {
 
       }
+
       min-height: 43px;
     }
 

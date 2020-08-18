@@ -110,6 +110,11 @@
                                             </span>
                                         </t>
                                         <samp t-else="" class="text-muted"/>
+
+                                        <div class="o_doc_excerpt">
+                                            <field name="esc_excerpt"/>
+                                            <field name="excerpt" style="display: none;"/>
+                                        </div>
                                     </div>
                                     <field name="tag_ids" widget="many2many_tags"/>
                                     <div class="o_kanban_record_bottom">
@@ -189,7 +194,7 @@
                     </group>
 
                     <group>
-                        <field name="excerpt"/>
+                        <field name="excerpt" widget="html"/>
                     </group>
 
                 </sheet>

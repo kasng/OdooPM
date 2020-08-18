@@ -35,7 +35,8 @@ odoo.define('sync_documents.DashboardKanbanController', function (require) {
             on_edit_record: '_onEditRecord',
             on_change_folder: '_onChangeFolder',
             on_change_tag: '_onChangeTag',
-            on_upload_attachment: '_onUploadAttachment'
+            on_upload_attachment: '_onUploadAttachment',
+            on_show_excerpt: '_onShowExcerpt'
         }),
         init: function (parent, model, renderer, params) {
             this._super.apply(this, arguments);
@@ -337,20 +338,20 @@ odoo.define('sync_documents.DashboardKanbanController', function (require) {
                 method: 'xmlid_to_res_model_res_id',
                 args: ["sync_documents.attachment_form_view"],
             })
-            .then(function (data) {
-                var state = $.bbq.getState(true);
-                return self.do_action({
-                    type: 'ir.actions.act_window',
-                    name: "Documents Dashboard",
-                    res_model: 'ir.attachment',
-                    views: [[data[1], 'form']],
-                    target: 'current',
-                    res_id: Number(String(ev.data.res_id).replace('ir.attachment_','')),
-                    view_id: 'sync_doc_attachment_form_view',
-                    domain: [['res_field', '=', false], ['folder_id', '!=', false]],
-                    id: state.action
+                .then(function (data) {
+                    var state = $.bbq.getState(true);
+                    return self.do_action({
+                        type: 'ir.actions.act_window',
+                        name: "Documents Dashboard",
+                        res_model: 'ir.attachment',
+                        views: [[data[1], 'form']],
+                        target: 'current',
+                        res_id: Number(String(ev.data.res_id).replace('ir.attachment_', '')),
+                        view_id: 'sync_doc_attachment_form_view',
+                        domain: [['res_field', '=', false], ['folder_id', '!=', false]],
+                        id: state.action
+                    });
                 });
-            });
         },
         _updateRecord: function (recordID, form_values) {
             var self = this;
@@ -416,6 +417,24 @@ odoo.define('sync_documents.DashboardKanbanController', function (require) {
             ;
             this._onRecordSelect(this.recordIDs);
             this.renderer.selectRecord(this.recordIDs);
+        },
+
+        _onShowExcerpt: function (ev) {
+            ev.stopPropagation();
+            var state = this.model.get(this.handle);
+            console.log(state);
+            console.log(ev);
+            console.log(this.recordIDs);
+            var self = this, recordID = ev.data.record.id;
+            console.log(ev.data.record.excerpt);
+            var record = self.model.get(recordID);
+            console.log(ev.data.record);
+            return new Dialog(this, {
+                title: _t('Excerpt'),
+                $content: Qweb.render('Document.Excerpt', {
+                    'excerpt': ev.data.record.excerpt
+                }),
+            }).open();
         }
     });
 

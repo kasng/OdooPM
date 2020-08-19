@@ -49,8 +49,6 @@ class DocumentAction(models.Model):
         'rule_id', 'tag_id', string='Does not Contains')
     condition_user_id = fields.Many2one('res.users', string='Owner')
 
-    project_id = fields.Many2one('project.project', string='Move to Project')
-
     def create_model_record(self, attachments):
         return True
 

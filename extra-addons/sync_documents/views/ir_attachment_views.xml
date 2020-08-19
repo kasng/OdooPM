@@ -117,6 +117,7 @@
                                         </div>
                                     </div>
                                     <field name="tag_ids" widget="many2many_tags"/>
+                                    <field name="project_ids" widget="many2many_tags"/>
                                     <div class="o_kanban_record_bottom">
                                         <time class="oe_kanban_bottom_left">
                                             <field name="create_date" widget="date"/>

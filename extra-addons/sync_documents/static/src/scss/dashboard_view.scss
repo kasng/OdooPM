@@ -265,10 +265,26 @@
       transition-duration: 0.3s;
       border-left: 1px solid #E5E5E5;
 
+      display: flex;
+      justify-content: space-between;
+      padding-left: 14px;
+      padding-right: 14px;
+
       & > .sd_documents_manager_header {
         .sd-btn-group {
           border-bottom: 1px solid #E5E5E5;
 
+          .btn {
+            background-color: #a5a5a5;
+            color: #FFFFFF;
+          }
+        }
+      }
+
+      & > .project-manager {
+        .sd-btn-group {
+          padding: 0.5rem;
+          border-bottom: 1px solid #E5E5E5;
           .btn {
             background-color: #a5a5a5;
             color: #FFFFFF;

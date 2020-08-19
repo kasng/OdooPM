@@ -36,7 +36,8 @@ odoo.define('sync_documents.DashboardKanbanController', function (require) {
             on_change_folder: '_onChangeFolder',
             on_change_tag: '_onChangeTag',
             on_upload_attachment: '_onUploadAttachment',
-            on_show_excerpt: '_onShowExcerpt'
+            on_attach_project: '_onOpenAttachProject',
+            on_detach_project: '_onOpenDetachProject',
         }),
         init: function (parent, model, renderer, params) {
             this._super.apply(this, arguments);
@@ -339,6 +340,8 @@ odoo.define('sync_documents.DashboardKanbanController', function (require) {
                 args: ["sync_documents.attachment_form_view"],
             })
                 .then(function (data) {
+                    console.log(data);
+                    console.log(ev.data.res_id);
                     var state = $.bbq.getState(true);
                     return self.do_action({
                         type: 'ir.actions.act_window',
@@ -421,20 +424,55 @@ odoo.define('sync_documents.DashboardKanbanController', function (require) {
 
         _onShowExcerpt: function (ev) {
             ev.stopPropagation();
-            var state = this.model.get(this.handle);
-            console.log(state);
-            console.log(ev);
-            console.log(this.recordIDs);
-            var self = this, recordID = ev.data.record.id;
-            console.log(ev.data.record.excerpt);
-            var record = self.model.get(recordID);
-            console.log(ev.data.record);
             return new Dialog(this, {
                 title: _t('Excerpt'),
                 $content: Qweb.render('Document.Excerpt', {
                     'excerpt': ev.data.record.excerpt
                 }),
             }).open();
+        },
+
+        _onOpenAttachProject: function (ev) {
+            console.log(ev);
+            ev.stopPropagation();
+            var self = this;
+            console.log(this.recordIDs);
+            console.log(self.recordIDs[0]);
+            console.log(ev.data.res_id);
+            var state = $.bbq.getState(true);
+            console.log(state);
+            self._rpc({
+                model: 'ir.model.data',
+                method: 'xmlid_to_res_model_res_id',
+                args: ["sync_documents.dha_document_project_list"],
+            })
+                .then(function (data) {
+                    console.log(data);
+                    var state = $.bbq.getState(true);
+                    console.log(state);
+                    return self.do_action({
+                        type: 'ir.actions.act_window',
+                        name: "Attach to Project",
+                        res_model: 'ir.attachment',
+                        views: [[data[1], 'form']],
+                        target: 'new',
+                        res_id: self.recordIDs[0],
+                        id: state.action,
+                        context: {
+                            "selectedDocuments": self.recordIDs
+                        }
+                    }, {
+                        on_close: function () {
+                            self.trigger_up('reload');
+                        },
+                    });
+                });
+        },
+
+        _onOpenDetachProject: function (ev) {
+            console.log(ev);
+            ev.stopPropagation();
+            console.log(this.recordIDs);
         }
     });
 

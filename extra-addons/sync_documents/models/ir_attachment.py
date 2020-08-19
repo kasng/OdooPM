@@ -21,6 +21,15 @@ class IrAttachment(models.Model):
     dha_doc_id = fields.Many2one('dha.document', string='DHA Documents')
     excerpt = fields.Text(string='Excerpt')
     esc_excerpt = fields.Text(compute='_compute_esc_excerpt')
+    project_ids = fields.Many2many('project.project', string='Project attachment')
+
+    def attach_project(self):
+        selected_documents = self.env.context.get('selectedDocuments')
+        if selected_documents:
+            self.browse(selected_documents).update({
+                'project_ids': self.project_ids
+            })
+        return None
 
     def _compute_esc_excerpt(self):
         for rec in self:

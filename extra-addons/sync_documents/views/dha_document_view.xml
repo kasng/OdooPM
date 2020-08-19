@@ -1,0 +1,22 @@
+<?xml version="1.0"?>
+<odoo>
+    <record id="dha_document_project_list" model="ir.ui.view">
+        <field name="name">dha.document.project.form</field>
+        <field name="model">ir.attachment</field>
+        <field name="arch" type="xml">
+            <form create="false">
+                <sheet>
+                    <notebook>
+                        <page string="Projects">
+                            <field name="project_ids"/>
+                        </page>
+                    </notebook>
+                </sheet>
+                <footer>
+                    <button name="attach_project" type="object" string="Add to Projects" class="btn-primary"/>
+                    <button string="Cancel" class="btn-secondary" special="cancel"/>
+                </footer>
+            </form>
+        </field>
+    </record>
+</odoo>

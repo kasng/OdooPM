@@ -42,7 +42,9 @@
                                     <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
                                         <li t-foreach="widget.tags" t-as="tag" class="add-tag">
                                             <a class="dropdown-item" href="#" t-att-data-id="tag.id">
-                                                <t t-esc="tag.group_name"/> <i class="fa fa-angle-right"/> <t t-esc="tag.name"/>
+                                                <t t-esc="tag.group_name"/>
+                                                <i class="fa fa-angle-right"/>
+                                                <t t-esc="tag.name"/>
                                             </a>
                                         </li>
                                         <li class="dropdown-divider" t-if="widget.removeTags.length !== 0"/>
@@ -51,7 +53,9 @@
                                             <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
                                                 <li t-foreach="widget.removeTags" t-as="tag">
                                                     <a class="dropdown-item" href="#" t-att-data-id="tag.id">
-                                                        <t t-esc="tag.group_name"/> <i class="fa fa-angle-right"/> <t t-esc="tag.name"/>
+                                                        <t t-esc="tag.group_name"/>
+                                                        <i class="fa fa-angle-right"/>
+                                                        <t t-esc="tag.name"/>
                                                     </a>
                                                 </li>
                                             </ul>
@@ -65,7 +69,9 @@
                                 </button>
                                 <div class="dropdown-menu actions_menu" aria-labelledby="dropdownMenuButton">
                                     <t t-foreach="widget.documentActionRules" t-as="rule">
-                                        <a class="dropdown-item" href="#" t-att-data-id="rule.id"><t t-esc="rule.name"/></a>
+                                        <a class="dropdown-item" href="#" t-att-data-id="rule.id">
+                                            <t t-esc="rule.name"/>
+                                        </a>
                                     </t>
                                 </div>
                             </div>
@@ -79,17 +85,31 @@
                                 </button>
                                 <div class="dropdown-menu action_records" aria-labelledby="dropdownMenuButton">
                                     <t t-foreach="widget.correspondingRecords" t-as="record">
-                                        <a class="js_open_corresponding_record dropdown-item" href="#" t-att-data-id="record.id" t-att-data-model="record.res_model"><t t-esc="record.display_name"/></a>
+                                        <a class="js_open_corresponding_record dropdown-item" href="#" t-att-data-id="record.id" t-att-data-model="record.res_model">
+                                            <t t-esc="record.display_name"/>
+                                        </a>
                                     </t>
                                 </div>
                             </div>
                             <span t-if="widget.recordIDs.length > 1" class="pull-right sd_documents">
-                                <t t-esc="widget.recordIDs.length"/> documents selected
+                                <t t-esc="widget.recordIDs.length"/>
+                                documents selected
                             </span>
                         </div>
                     </div>
                 </t>
             </div>
+
+            <div class="project-manager">
+                <div class="sd-btn-group">
+                    <div class="d-inline sd_btn_actions">
+                    <button class="btn attach-project" type="button">
+                        Project Actions
+                    </button>
+                </div>
+                </div>
+            </div>
+
         </div>
     </t>
 

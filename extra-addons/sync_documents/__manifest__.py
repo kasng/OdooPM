@@ -29,6 +29,7 @@ Manage Documents in Odoo.
         'views/attachments_share_views.xml',
         'views/template.xml',
         'views/res_config_setting_view.xml',
+        'views/dha_document_view.xml',
         'wizard/attachment_request_views.xml',
     ],
      'qweb': [

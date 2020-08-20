@@ -24,6 +24,7 @@ odoo.define('sync_documents.DashboardManager', function (require) {
             'click .sd_btn_chatter_close': '_onCloseChatter',
             'click .attach-project': '_onOpenAttachProject',
             'click .detach-project': '_onOpenDetachProject',
+            'click .o_doc_excerpt': '_onShowExcerpt',
         },
         init: function (parent, params) {
             var self = this;
@@ -221,6 +222,13 @@ odoo.define('sync_documents.DashboardManager', function (require) {
         _onOpenDetachProject: function (ev) {
             ev.preventDefault();
             this.trigger_up('on_detach_project', {
+                records: this.records,
+            });
+        },
+
+        _onShowExcerpt: function (ev) {
+            ev.preventDefault();
+            this.trigger_up('on_show_excerpt', {
                 records: this.records,
             });
         }

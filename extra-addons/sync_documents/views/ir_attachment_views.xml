@@ -195,7 +195,7 @@
                     </group>
 
                     <group>
-                        <field name="excerpt" widget="html"/>
+                        <field name="excerpt"/>
                     </group>
 
                 </sheet>

@@ -3,17 +3,16 @@
     <record id="dha_document_project_list" model="ir.ui.view">
         <field name="name">dha.document.project.form</field>
         <field name="model">ir.attachment</field>
+        <field name="priority">30</field>
         <field name="arch" type="xml">
             <form create="false">
                 <sheet>
-                    <notebook>
-                        <page string="Projects">
-                            <field name="project_ids"/>
-                        </page>
-                    </notebook>
+                    <group>
+                        <field name="project_ids" nolabel="1"/>
+                    </group>
                 </sheet>
                 <footer>
-                    <button name="attach_project" type="object" string="Add to Projects" class="btn-primary"/>
+                    <button name="attach_project" type="object" string="Save" class="btn-primary"/>
                     <button string="Cancel" class="btn-secondary" special="cancel"/>
                 </footer>
             </form>

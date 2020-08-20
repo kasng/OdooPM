@@ -38,6 +38,7 @@ odoo.define('sync_documents.DashboardKanbanController', function (require) {
             on_upload_attachment: '_onUploadAttachment',
             on_attach_project: '_onOpenAttachProject',
             on_detach_project: '_onOpenDetachProject',
+            on_show_excerpt: '_onShowExcerpt'
         }),
         init: function (parent, model, renderer, params) {
             this._super.apply(this, arguments);

@@ -46,6 +46,7 @@
         <field name="arch" type="xml">
             <tree js_class="documents_dashboard_list" create="false" edit="false">
                 <field name="name"/>
+                <field name="excerpt" widget="char"/>
                 <field name="tag_ids" widget="many2many_tags"/>
                 <field name="res_model" invisible="1"/>
                 <field name="res_field" invisible="1"/>

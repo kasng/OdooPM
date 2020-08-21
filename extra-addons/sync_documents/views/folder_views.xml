@@ -40,8 +40,9 @@
                 <field name="no_of_files"/>
                 <field name="count_action"/>
                 <field name="tag_ids"/>
+                <field name="project_id"/>
                 <templates>
-                    <div t-name="kanban-box" class="oe_kanban_card oe_kanban_global_click o_folder_kanban_record">
+                    <div t-if="!record.project_id.raw_value" t-att-data-value="record.project_id" t-name="kanban-box" t-attf-class="oe_kanban_card oe_kanban_global_click o_folder_kanban_record o_folder_project_#{record.project_id.raw_value}">
                         <div class="o_kanban_image">
                             <img t-att-src="kanban_image('folder.folder', 'thumbnail', record.id.raw_value)" alt="Product" class="o_image_64_contain"/>
                         </div>
@@ -73,6 +74,66 @@
                             </div>
                         </div>
                     </div>
+
+                </templates>
+            </kanban>
+
+        </field>
+    </record>
+
+    <record id="project_folder_kanban_view" model="ir.ui.view">
+        <field name="name">folder.folder.kanban</field>
+        <field name="model">folder.folder</field>
+        <field name="priority">10</field>
+        <field name="arch" type="xml">
+            <kanban class="o_folder_kanban">
+                <field name="id"/>
+                <field name="name"/>
+                <field name="parent_id"/>
+                <field name="no_of_subfolders"/>
+                <field name="no_of_files"/>
+                <field name="count_action"/>
+                <field name="tag_ids"/>
+                <field name="project_id"/>
+                <templates>
+                    <div t-if="record.project_id.raw_value" t-att-data-value="record.project_id" t-name="kanban-box" t-attf-class="oe_kanban_card oe_kanban_global_click o_folder_kanban_record o_folder_project_#{record.project_id.raw_value}">
+                        <div class="o_kanban_image">
+                            <img t-att-src="kanban_image('folder.folder', 'thumbnail', record.id.raw_value)" alt="Product" class="o_image_64_contain"/>
+                        </div>
+                        <div class="oe_kanban_details">
+                            <strong class="o_kanban_record_title">
+                                <small t-if="record.parent_id.value"><span t-esc="record.parent_id.value"/> / </small>
+                                <span class="h4"><field name="name"/></span>
+                            </strong>
+                            <ul>
+                                <li>
+                                    <field name="project_id"/>
+                                </li>
+                            </ul>
+                            <field name="tag_ids" widget="many2many_tags"/>
+                            <div class="row">
+                                <div class="col-4 p-0">
+                                    <div class="d-flex flex-column align-items-center">
+                                        <span class="font-weight-bold text-info"><i class="fa fa-folder-open-o"/> <field name="no_of_subfolders"/></span>
+                                        <span class="text-muted">Folders</span>
+                                    </div>
+                                </div>
+                                <div class="col-4 p-0 border-left">
+                                    <div class="d-flex flex-column align-items-center">
+                                        <span class="font-weight-bold text-info"><i class="fa fa-files-o"/> <field name="no_of_files"/></span>
+                                        <span class="text-muted">Files</span>
+                                    </div>
+                                </div>
+                                <div class="col-4 p-0 border-left">
+                                    <div class="d-flex flex-column align-items-center">
+                                        <span class="font-weight-bold text-info"><i class="fa fa-cogs"/> <field name="count_action"/></span>
+                                        <span class="text-muted">Actions</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
                 </templates>
             </kanban>
 
@@ -103,6 +164,10 @@
                         <group>
                             <field name="company_id"/>
                         </group>
+
+                        <group>
+                            <field name="project_id" invisible="context.get('active_model', False) != 'project.project'"/>
+                        </group>
                     </group>
                     <notebook>
                          <page string="Access Rights">
@@ -130,7 +195,7 @@
         <field name="name">Folders</field>
         <field name="type">ir.actions.act_window</field>
         <field name="res_model">folder.folder</field>
-        <field name="context">{'id':'active_id'}</field>
+        <field name="context">{'id':'active_id', 'active_model': 'sync_document'}</field>
         <field name="view_mode">kanban,tree,form</field>
         <field name="help" type="html">
             <p class="o_view_nocontent_smiling_face">
@@ -142,5 +207,22 @@
     <menuitem name="Documents" id="sync_documents_menu_root" web_icon="sync_documents,static/description/icon.png"/>
     <menuitem name="Configuration" id="sync_documents_config" parent="sync_documents_menu_root" sequence="2"/>
     <menuitem name="Folders" id="sync_documents_folders" action="sync_documents.action_folder" parent="sync_documents_config" sequence="2"/>
+
+    <record id="project_action_folder" model="ir.actions.act_window">
+        <field name="name">Folders</field>
+        <field name="type">ir.actions.act_window</field>
+        <field name="res_model">folder.folder</field>
+        <field name="context">{'id':'active_id', 'active_model': 'project.project'}</field>
+        <field name="view_mode">kanban,tree,form</field>
+        <field name="view_ids" eval="[(5, 0, 0),
+            (0, 0, {'view_mode': 'kanban', 'view_id': ref('sync_documents.project_folder_kanban_view')})]"/>
+        <field name="help" type="html">
+            <p class="o_view_nocontent_smiling_face">
+                Create a new Folder.
+            </p>
+        </field>
+    </record>
+
+    <menuitem name="Folders" id="project_documents_folders" action="sync_documents.project_action_folder" parent="project.menu_project_config" sequence="2"/>
 
 </odoo>

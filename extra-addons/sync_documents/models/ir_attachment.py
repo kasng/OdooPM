@@ -77,19 +77,22 @@ class IrAttachment(models.Model):
     @api.model
     def search_panel_select_range(self, field_name):
         res = super(IrAttachment, self.with_context(hierarchical_naming=False)).search_panel_select_range(field_name)
+
+        field = self._fields[field_name]
+        Comodel = self.env[field.comodel_name]
+        fields = ['display_name']
+        parent_name = Comodel._parent_name if Comodel._parent_name in Comodel._fields else False
+        if parent_name:
+            fields.append(parent_name)
+
         if res['values']:
             if self.env.context.get('res_model'):
                 if self.env.context.get('res_model') == 'project.project':
                     # Filter by project id
                     if field_name == 'folder_id':
-                        field = self._fields[field_name]
-                        Comodel = self.env[field.comodel_name]
-                        fields = ['display_name']
-                        parent_name = Comodel._parent_name if Comodel._parent_name in Comodel._fields else False
-                        if parent_name:
-                            fields.append(parent_name)
                         res['values'] = Comodel.with_context(hierarchical_naming=False).search_read([('project_id', '=', self.env.context.get('res_id'))], fields, limit=SEARCH_PANEL_LIMIT)
-
+            else:
+                res['values'] = Comodel.with_context(hierarchical_naming=False).search_read([('project_id', '=', None)], fields, limit=SEARCH_PANEL_LIMIT)
         return res
 
     @api.model

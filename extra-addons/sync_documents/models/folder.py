@@ -47,6 +47,7 @@ class Folder(models.Model):
                 help='Number of files currently occupying this Folder.')
     action_ids = fields.One2many('document.action.rule', 'folder_id', string='Actions')
     count_action = fields.Integer(string='Total Action', compute='_compute_action_ids')
+    project_id = fields.Many2one('project.project', 'Projects', required=False)
 
     @api.constrains('parent_id')
     def _check_parent_id(self):

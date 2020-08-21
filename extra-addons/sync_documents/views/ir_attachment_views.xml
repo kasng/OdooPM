@@ -164,7 +164,7 @@
 
     <record id="attachment_form_view" model="ir.ui.view">
         <field name="name">Attachments</field>
-        <field name="priority" eval="26"/>
+        <field name="priority" eval="10"/>
         <field name="model">ir.attachment</field>
         <field name="arch" type="xml">
             <form>

@@ -8,6 +8,30 @@ class DHAProject(models.Model):
     # sync_doc_count = fields.Integer(compute='_compute_syned_docs_count', string="Number of sync documents attached")
 
     def attachment_tree_view(self):
+        attachment_action = self.env.ref('sync_documents.action_document_dashboard')
+        action = attachment_action.read()[0]
+        action['domain'] = str([
+            '|',
+            '&',
+            ('res_model', '=', 'project.project'),
+            ('res_id', 'in', self.ids),
+            '&',
+            ('res_model', '=', 'project.task'),
+            ('res_id', 'in', self.task_ids.ids)
+        ])
+        action['context'] = "{'default_res_model': '%s','default_res_id': %d}" % (self._name, self.id)
+
+        action['display_name'] = _('Documents')
+        domain = ast.literal_eval(action['domain'])
+        # Get data from dha_document
+        dha_documents = self.env['ir.attachment'].search([('project_ids', '=', self.id)])
+        if dha_documents:
+            domain.insert(0, '|')
+            domain.append(('id', 'in', dha_documents.ids))
+            action['domain'] = str(domain)
+
+        return action
+
         action = super(DHAProject, self).attachment_tree_view()
         action['display_name'] = _('Documents')
         domain = ast.literal_eval(action['domain'])

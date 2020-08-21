@@ -41,6 +41,7 @@ odoo.define('sync_documents.DashboardKanbanController', function (require) {
             on_show_excerpt: '_onShowExcerpt'
         }),
         init: function (parent, model, renderer, params) {
+            console.log(arguments);
             this._super.apply(this, arguments);
             this.record = this.model.get(this.handle);
             this.recordIDs = [];
@@ -218,6 +219,7 @@ odoo.define('sync_documents.DashboardKanbanController', function (require) {
         _onChangeFolder: function (ev) {
             var self = this, selectedFolderID = ev.data.selectedFolderID,
                 resIDs = ev.data.resIDs;
+            console.log(ev.data.resIDs);
             this._updateRecord(resIDs, {'folder_id': selectedFolderID, 'tag_ids': [[6, 0, []]]})
         },
         _onChangeTag: function (ev) {

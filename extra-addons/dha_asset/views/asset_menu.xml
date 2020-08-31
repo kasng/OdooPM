@@ -5,7 +5,7 @@
     <!--+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++-->
 
     <!--App Menu-->
-    <menuitem name="Asset" id="dha_asset_menu" />
+    <menuitem name="Asset" id="dha_asset_menu" web_icon="dha_asset,static/description/icon.png"/>
 
     <!--Asset-->
     <menuitem name="Asset" id="mnu_asset" parent="dha_asset_menu" sequence="1"/>

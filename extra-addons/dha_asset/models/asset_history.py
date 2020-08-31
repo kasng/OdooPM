@@ -34,7 +34,6 @@ class AsMeterHistory(models.Model):
         string='Meter Source', readonly=True)
 
 
-
 class AsFuelHistory(models.Model):
     _name = 'as.fuel.his'
     _description = 'Fuel History'
@@ -81,4 +80,3 @@ class AsExpenseHistory(models.Model):
     expense_time = fields.Datetime('Expense Time')
     inspector_id = fields.Many2one('hr.employee', string='Operator', readonly=True)
     meter_usage_id = fields.Many2one('as.meter.usage', string='Meter Usage')
-

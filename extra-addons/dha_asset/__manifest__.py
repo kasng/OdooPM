@@ -1,15 +1,26 @@
 # -*- coding: utf-8 -*-
 {
-    'name': "Asset Management System",  # Module title
-    'summary': "",  # Module subtitle phrase
-    'description': """""",  # You can also rst format
+    'name': "Asset Management System",
+
+    'summary': "",
+
+    'description': "",
+
     'author': "DHA Vietnam",
     'website': "http://www.dha-tech.com.vn",
+
+    # Categories can be used to filter modules in modules listing
+    # Check https://github.com/odoo/odoo/blob/13.0/odoo/addons/base/data/ir_module_category_data.xml
+    # for the full list
     'category': 'Asset',
-    'version': '12.0.1',
+    'version': '0.1',
+
+    # any module necessary for this one to work correctly
     'depends': ['base', 'hr', 'stock'],
-    # This data files will be loaded at the installation (commented becaues file is not added in this example)
+
+    # always loaded
     'data': [
+        'security/ir.model.access.csv',
         'views/asset_config.xml',
         'views/asset_location.xml',
         'views/asset_asset.xml',
@@ -20,5 +31,9 @@
         'views/asset_menu.xml',
         'wizard/enter_meter_wizard.xml',
         'wizard/enter_expense_wizard.xml'
+    ],
+    # only loaded in demonstration mode
+    'demo': [
+        'demo/demo.xml',
     ],
 }

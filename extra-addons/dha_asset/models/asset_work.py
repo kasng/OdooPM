@@ -10,7 +10,7 @@ class AsWorkType(models.Model):
     _description = 'Work Type'
 
     name = fields.Char('Work Type', required=True)
-    description = fields.Char('Description',required=True)
+    description = fields.Char('Description', required=True)
 
 
 class AsPlanMaterial(models.Model):
@@ -30,6 +30,7 @@ class AsPlanMaterial(models.Model):
         for record in self:
             record.line_cost = record.quantity * record.unit_cost
 
+
 class StockMove(models.Model):
     _inherit = 'stock.move'
 
@@ -40,19 +41,8 @@ class AsWorkOrder(models.Model):
     _name = 'as.work.order'
     _description = 'as.work.order'
 
-
     name = fields.Char('Work Order')
     description = fields.Char('Description')
 
     plan_material_ids = fields.One2many('as.plan.material', 'work_order_id')
     stock_move_ids = fields.One2many('stock.move', 'work_order_id')
-
-
-
-
-
-
-
-
-
-

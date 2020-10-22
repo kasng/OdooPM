@@ -35,7 +35,8 @@ class Folder(models.Model):
         ('by_user', "By User"),
         ('by_group', "By Group"),
     ], default='by_user', string="Allow Access")
-    group_ids = fields.Many2many('res.groups', string="Groups")
+    group_ids = fields.Many2many('res.groups', string="Write Groups")
+    read_group_ids = fields.Many2many('res.groups', relation='folder_read', string="Read Groups")
     user_ids = fields.Many2many('res.users', string='Users', default=lambda self: [self.env.user.id])
     tag_ids = fields.One2many('tag.tag', 'folder_id', string="Tags")
     description = fields.Html(string="Description")

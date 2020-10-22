@@ -144,7 +144,7 @@
         <field name="name">Folder form</field>
         <field name="model">folder.folder</field>
         <field name="arch" type="xml">
-            <form>
+            <form edit="{}">
                 <sheet>
                     <div class="oe_button_box" name="button_box">
                         <button type="object" name="show_actions" class="oe_stat_button" icon="fa-gears">
@@ -170,7 +170,10 @@
                         </group>
                     </group>
                     <notebook>
-                         <page string="Access Rights">
+                         <page string="Read Rights">
+                            <field name="read_group_ids"/>
+                         </page>
+                         <page string="Write Rights">
                             <field name="group_ids"/>
                          </page>
                         <page string="Tags">
@@ -190,6 +193,8 @@
             </form>
         </field>
     </record>
+
+
 
     <record id="action_folder" model="ir.actions.act_window">
         <field name="name">Folders</field>
